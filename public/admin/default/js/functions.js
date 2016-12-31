@@ -69,8 +69,20 @@ $(document).ready(function(){
 	var skin = $(this).data('skin');
 	$('body').attr('id', skin);
 	$('#changeSkin').modal('hide');
+		setCookie('background-image',skin,30);
     });
-    
+
+	// 设置cookie
+	function setCookie(c_name,value,expiredays)
+	{
+		var exdate=new Date()
+		exdate.setDate(exdate.getDate()+expiredays)
+		document.cookie=c_name+ "=" +escape(value)+
+			((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+	}
+
+
+
     /* --------------------------------------------------------
 	Components
     -----------------------------------------------------------*/
