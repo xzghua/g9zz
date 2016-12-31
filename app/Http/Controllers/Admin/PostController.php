@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Repositories\Eloquent\PostRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+
 //use Illuminate\Support\Facades\Input;
 
 class PostController extends Controller
@@ -29,9 +31,9 @@ class PostController extends Controller
     {
         //
 
-        $a = $this->repository->paginate();
-        dd($a);
-        return view('admin.post.index');
+        $paginate = $this->repository->paginate();
+
+        return view('admin.post.index',compact('paginate'));
     }
 
     /**
@@ -41,12 +43,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        $input = \Input::only(['sddd']);
-
-        dd($input);
 
 
-
+        return view('admin.post.create');
     }
 
     /**
@@ -57,7 +56,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input =  $request->only(['title','categoryId','content']);
+        $input = parse_input($input);
+
+        \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
+
+        $rules = [
+            'title' => 'required',
+            'category_id' => 'required',//还需校验分类是否存在
+
+        ];
+
+        $this->requestValidate($input,$rules,'post');
+
+        $input['user_id'] = 1;//作者名称
+
+        $id = $this->repository->create($input);
+
+        return view('admin.post.create');
     }
 
     /**

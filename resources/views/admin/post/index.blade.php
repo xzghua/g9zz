@@ -22,103 +22,45 @@
                 <thead>
                 <tr>
                     <th>No.</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                    <th>Username</th>
-                    <th>Username</th>
-                    <th>Username</th>
+                    <th>作者</th>
+                    <th>贴子标题</th>
+                    <th>分类</th>
+                    <th>回复数</th>
+                    <th>查看数</th>
+                    <th>点赞数</th>
+                    <th>最后回复</th>
+                    <th>置顶</th>
+                    <th>加精</th>
+                    <th>发帖时间</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Jhon </td>
-                    <td>Makinton </td>
-                    <td>@makinton</td>
-                    <td>@makinton</td>
-                    <td>@makinton</td>
-                    <td>@makinton</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Malinda</td>
-                    <td>Hollaway</td>
-                    <td>@hollway</td>
-                    <td>@hollway</td>
-                    <td>@hollway</td>
-                    <td>@hollway</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Wayn</td>
-                    <td>Parnel</td>
-                    <td>@wayne123</td>
-                    <td>@wayne123</td>
-                    <td>@wayne123</td>
-                    <td>@wayne123</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>TB - Monthly</td>
-                    <td>05/04/2012</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>TB - Monthly</td>
-                    <td>06/04/2012</td>
-                    <td>Pending</td>
-                    <td>Pending</td>
-                    <td>Pending</td>
-                    <td>Pending</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>TB - Monthly</td>
-                    <td>07/04/2012</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>TB - Monthly</td>
-                    <td>08/04/2012</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>TB - Monthly</td>
-                    <td>09/04/2012</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                    <td>Call in to confirm</td>
-                    <td>
-                        <button class="btn-primary">  <span class="icon">&#61952;</span> Button</button>
-                        <button class="btn-primary"> <span class="icon">&#61752;</span>Button</button>
-                        <button class="btn-danger"> <span class="icon">&#61918;</span> Button</button>
-                        <button class="btn-default">Button</button>
-                        <button class="btn-info">Button</button>
-                        <button class="btn-success">Button</button>
-                        <button class="btn-group ">Button</button>
-                    </td>
-                </tr>
+                @foreach($paginate as $item)
+                    <tr>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->user_id}}</td>
+                        <td>09/04/2012</td>
+                        <td>分类{{$item->id}}</td>
+                        <td>{{rand(1,100)}}</td>
+                        <td>{{rand(1,100)}}</td>
+                        <td>{{rand(1,100)}} </td>
+                        <td>叶落</td>
+                        <td>是</td>
+                        <td>是</td>
+                        <td>{{$item->created_at}}</td>
+                        <td>
+                            <button class="btn-primary">  <span class="icon">&#61952;</span> Button</button>
+                            <button class="btn-danger"> <span class="icon">&#61918;</span> Button</button>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 
-
-
-
+    
 @endsection
 
 @section('js')

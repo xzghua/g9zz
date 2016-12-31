@@ -8,6 +8,7 @@
 
 namespace App\Traits;
 
+use App\Exceptions\ValidatorException;
 
 trait Respond
 {
@@ -16,9 +17,10 @@ trait Respond
         $validation = config('validation');
         $validation = isset($validation[$key]) ? array_merge($validation['default'], $validation[$key]) : $validation['default'];
         $validate = \Validator::make($data, $rules, $validation);
+//        dd($validate->errors()->first());
         if ($validate->fails()) {
             $code = (int)$validate->errors()->first();
-            throw new \Dotenv\Exception\ValidationException($code);
+            throw new ValidatorException($code);
         }
     }
 }

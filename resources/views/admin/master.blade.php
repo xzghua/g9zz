@@ -165,7 +165,7 @@
                 </a>
                 <ul class="list-unstyled menu-item">
                     <li><a href="/admin/post" class="@if (\Request::getRequestUri() == '/admin/post') active @endif">列表</a></li>
-                    <li><a href="/admin/post">Form Components</a></li>
+                    <li><a href="/admin/post/create">创建帖子</a></li>
                     <li><a href="/admin/index">Form Examples</a></li>
                     <li><a href="/admin/index">Form Validation</a></li>
                 </ul>
@@ -590,10 +590,11 @@
 
 <!-- Other -->
 <script src="/admin/default/js/calendar.min.js"></script> <!-- Calendar -->
-<script src="/admin/default/js/feeds.min.js"></script> <!-- News Feeds -->
+{{--<script src="/admin/default/js/feeds.min.js"></script> <!-- News Feeds -->--}}
 
 
 <!-- All JS functions -->
 <script src="/admin/default/js/functions.js"></script>
+@yield('js')
 </body>
 </html>

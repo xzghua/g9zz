@@ -9,12 +9,13 @@
 
 return [
 
-    'defalut' => [
+    'default' => [
 
     ],
 
     'post' => [
-
+        'title.required' => 401000000,
+        'category_id.required' => 401000001,
     ],
 
 
