@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\Eloquent\PostRepository;
 use App\Repositories\Eloquent\ReplyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,9 +11,12 @@ class ReplyController extends Controller
 {
     public $repository;
 
-    public function __construct(ReplyRepository $replyRepository)
+    public $postRepository;
+
+    public function __construct(ReplyRepository $replyRepository,PostRepository $postRepository)
     {
         $this->repository = $replyRepository;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -22,7 +26,7 @@ class ReplyController extends Controller
      */
     public function index()
     {
-        $reply = $this->repository->paginate(per_page());
+        $reply = $this->repository->with(['post'])->with(['reply_user'])->paginate(per_page());
         return view('admin.'.set_theme().'.reply.index',compact('reply'));
     }
 
@@ -33,28 +37,47 @@ class ReplyController extends Controller
      */
     public function create()
     {
-
+        return view('admin.'.set_theme().'.reply.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function store(Request $request)
     {
-        $faker = \Faker\Factory::create('zh_CN');
-        $input = [
-            'post_id' => rand(1,20),
-            'user_id' => 1,
-            'vote_count' => rand(1,100),
-            'body' => $faker->text(200),
-            'body_original' => $faker->text(200)
+
+        $input = $request->only(['body','postId']);
+        $input = parse_input($input);
+
+        $rules = [
+            'body' => 'required',
+            'post_id' => 'required|exists:posts,id'
         ];
 
-        $this->repository->create($input);
+        $this->requestValidate($input,$rules,'reply');
+        $input['body_original'] = $input['body'];
+        $input['user_id'] = rand(1,30);//回复人的ID 谁登陆就是谁
 
+        $reply_count = $this->postRepository->find($input['post_id'])->reply_count;
+
+        try {
+            \DB::beginTransaction();
+            $this->repository->create($input);
+
+            $update['last_reply_user_id'] = $input['user_id'];
+            $update['reply_count'] = $reply_count + 1;
+            $this->postRepository->update($update,$input['post_id']);
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            $code = $e->getCode();
+            throw new \Exception($code);
+        }
+
+        return redirect()->back();
 
     }
 
@@ -77,7 +100,8 @@ class ReplyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reply = $this->repository->getEditReply($id);
+        return view('admin.'.set_theme().'.reply.edit',compact('reply'));
     }
 
     /**
@@ -89,7 +113,21 @@ class ReplyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->repository->find($id);
+
+        $input = $request->only(['isBlocked','body']);
+        $input = parse_input($input);
+
+        $input['is_blocked'] = !empty($input['is_blocked']) && $input['is_blocked'] == 'on' ? 'yes' : 'no';
+
+        $rules = [
+            'body' => 'required'
+        ];
+
+        $this->requestValidate($input,$rules,'reply');
+
+        $this->repository->update($input,$id);
+        return redirect()->route('reply.index');
     }
 
     /**

@@ -33,8 +33,6 @@ class PostController extends Controller
     public function index()
     {
         $paginate = $this->repository->with(['category'])->with(['author'])->with(['last_reply_user'])->paginate(per_page());
-        $categories = $this->categoryRepository->getCate();
-//        dd($paginate->toArray());
         return view('admin.'.set_theme().'.post.index',compact('paginate'));
     }
 
@@ -74,7 +72,7 @@ class PostController extends Controller
         $this->requestValidate($input,$rules,'post');
 
         $input['user_id'] = rand(1,30);//作者名称
-
+        $input['body_original'] = $input['content'];
         $id = $this->repository->create($input);
 
         return redirect()->route('post.create');
@@ -100,9 +98,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = $this->repository->find($id);
-
-        $categories = $this->categoryRepository->all();
-
+        $categories = $this->categoryRepository->getCate();
         return view('admin.'.set_theme().'.post.edit',compact('post','categories'));
 
     }
@@ -128,10 +124,10 @@ class PostController extends Controller
 
         $rules = [
             'title' => 'required',
-            'category_id' => 'required|exists:categories,id,'.$input['category_id'],//还需校验分类是否存在
+            'category_id' => 'required|exists:categories,id,id,'.$input['category_id'],//还需校验分类是否存在
 
         ];
-dd($input);
+
         $this->requestValidate($input,$rules,'post');
 
         $this->repository->update($input,$id);

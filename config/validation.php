@@ -26,4 +26,9 @@ return [
         'slug.unique' =>  402000003,
     ],
 
+    'reply' => [
+        'body.required' => 403000000,
+        'post_id.required' => 403000001,
+        'post_id.exists' => 403000002,
+    ],
 ];

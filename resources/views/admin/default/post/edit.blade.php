@@ -3,9 +3,9 @@
 @section('title','帖子')
 
 @section('menu','帖子')
-@section('page','创建帖子')
+@section('page','修改帖子')
 
-@section('pageTitle','创建帖子')
+@section('pageTitle','修改帖子')
 
 @section('css')
 
@@ -30,10 +30,9 @@
                     <h3 class="block-title">分类</h3>
 
                     <select name="categoryId" class="form-control input-sm validate[required]">
-                        <option value="1">分类1</option>
-                        <option value="2">分类2</option>
-                        <option value="3">分类3</option>
-                        <option value="4">分类4</option>
+                        @foreach( $categories as $item)
+                            <option value="{{$item->id}}" @if ($post->category_id == $item->id) selected @endif>{{$item->newHtml.$item->name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -42,12 +41,13 @@
 
             <div class="row">
                 <div class="col-md-1">
-                    <label for="excellent">加精</label>
-                    <input type="checkbox" @if ($post->is_excellent == 'yes') checked @endif  id="excellent" name="isExcellent" class="form-control m-b-8 ">
-                </div>
-                <div class="col-md-1">
                     <label for="top">置顶</label>
                     <input type="checkbox" @if ($post->is_top == 'yes') checked @endif  id="top" name="isTop" class="form-control m-b-8 " >
+                </div>
+
+                <div class="col-md-1">
+                    <label for="excellent">加精</label>
+                    <input type="checkbox" @if ($post->is_excellent == 'yes') checked @endif  id="excellent" name="isExcellent" class="form-control m-b-8 ">
                 </div>
             </div>
 

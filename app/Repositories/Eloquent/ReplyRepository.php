@@ -17,8 +17,12 @@ class ReplyRepository extends BaseRepository implements ReplyRepositoryInterface
     public function model()
     {
         // TODO: Implement model() method.
-        return Replies::class;
+        return 'App\Models\Replies';
     }
 
-
+    public function getEditReply($id)
+    {
+        // TODO: Implement getEditReply() method.
+        return $this->model->whereId($id)->with(['post'])->with(['reply_user'])->first();
+    }
 }

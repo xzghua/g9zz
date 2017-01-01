@@ -74,10 +74,12 @@
         </div>
     </div>
 
+    <div class="text-center">
+        {{ $paginate->appends(['sort' => 'created_at'])->links() }}
+    </div>
 
 @endsection
 
 @section('js')
-    {{--<script src="/admin/default/js/icheck.js"></script>--}}
-    {{--<script src="/admin/default/js/toggler.min.js"></script>--}}
+
 @endsection

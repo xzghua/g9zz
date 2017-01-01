@@ -40,4 +40,16 @@ class Replies extends Model
         'source','post_id','user_id','is_blocked',
         'vote_count','body','body_original',
     ];
+
+    public function post()
+    {
+        return $this->hasOne(Posts::class,'id','post_id');
+    }
+
+    public function reply_user()
+    {
+        return $this->hasOne(Users::class,'id','user_id');
+    }
+
+
 }

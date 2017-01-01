@@ -23,10 +23,8 @@
                 <tr>
                     <th>No.</th>
                     <th>帖子名</th>
-                    <th>缩略名</th>
                     <th>用户名</th>
                     <th>是否block</th>
-                    <th>回复数</th>
                     <th>投票数</th>
                     <th>回复内容</th>
                     <th>内容原文</th>
@@ -37,14 +35,12 @@
                 @foreach($reply as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->id}}</td>
+                        <td>{{empty($item->post) ? '--' : $item->post->title}}</td>
+                        <td>{{empty($item->reply_user) ? '--' : $item->reply_user->name}}</td>
+                        <td>{{$item->is_blocked == 'yes' ? '是' : '否'}}</td>
+                        <td>{{$item->vote_count}}</td>
+                        <td>{{ cut_html_str( $item->body,30)}}</td>
+                        <td>{{ cut_html_str($item->body_original,30)}}</td>
                         <td>
                             <button class="btn-primary"><a href="/admin/reply/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
                             <form action="/admin/reply/{{$item->id}}" method="post">
@@ -60,7 +56,9 @@
         </div>
     </div>
 
-
+    <div class="text-center">
+        {{ $reply->appends(['sort' => 'created_at'])->links() }}
+    </div>
 @endsection
 
 @section('js')

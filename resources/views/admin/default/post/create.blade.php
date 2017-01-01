@@ -43,12 +43,12 @@
 
                 <div class="row">
                     <div class="col-md-1">
-                        <label for="excellent">加精</label>
-                        <input type="checkbox" id="excellent" name="isExcellent" class="form-control m-b-8 ">
-                    </div>
-                    <div class="col-md-1">
                         <label for="top">置顶</label>
                         <input type="checkbox" id="top" name="isTop" class="form-control m-b-8 " >
+                    </div>
+                    <div class="col-md-1">
+                        <label for="excellent">加精</label>
+                        <input type="checkbox" id="excellent" name="isExcellent" class="form-control m-b-8 ">
                     </div>
                 </div>
 

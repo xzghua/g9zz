@@ -50,7 +50,9 @@
         </div>
     </div>
 
-
+    {{--<div class="text-center">--}}
+        {{--{{ $category->appends(['sort' => 'created_at'])->links() }}--}}
+    {{--</div>--}}
 @endsection
 
 @section('js')
