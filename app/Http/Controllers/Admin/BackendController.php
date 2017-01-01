@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -82,5 +83,10 @@ class BackendController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function testMail()
+    {
+        \Mail::to('2067930913@qq.com')->send(new SendMail('reply','http://www.g9zz.com','叶落山城秋'));
     }
 }

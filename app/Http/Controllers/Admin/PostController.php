@@ -147,4 +147,10 @@ class PostController extends Controller
         //
         dd($id,222222);
     }
+
+    public function vote(Request $request,$id)
+    {
+
+    }
+
 }

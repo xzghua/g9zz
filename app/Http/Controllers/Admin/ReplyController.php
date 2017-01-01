@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\SendMail;
 use App\Repositories\Eloquent\PostRepository;
 use App\Repositories\Eloquent\ReplyRepository;
 use Illuminate\Http\Request;
@@ -63,6 +64,13 @@ class ReplyController extends Controller
 
         $reply_count = $this->postRepository->find($input['post_id'])->reply_count;
 
+        $email = '2067930913@qq.com';//被回复的帖子的人
+        $replier = url(route('post.show',$input['user_id']));
+        $name = '叶落山城秋';
+        $articleAddress = url(route('post.show',$input['user_id']));
+        $article = $this->postRepository->find($input['post_id'])->title;
+        $content = $input['body'];
+
         try {
             \DB::beginTransaction();
             $this->repository->create($input);
@@ -70,6 +78,10 @@ class ReplyController extends Controller
             $update['last_reply_user_id'] = $input['user_id'];
             $update['reply_count'] = $reply_count + 1;
             $this->postRepository->update($update,$input['post_id']);
+
+
+            \Mail::to($email)->send(new SendMail('reply',$replier,$name,$articleAddress,$article,$content));
+
             \DB::commit();
         } catch (\Exception $e) {
             \DB::rollBack();
