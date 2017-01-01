@@ -14,9 +14,11 @@
 @section('content')
 
         <div class="block-area" id="required">
-            <h3 class="block-title">帖子标题</h3>
+
             <form role="form" class="form-validation-1" action="/admin/post" method="post">
                 {{ csrf_field() }}
+
+                <h3 class="block-title">帖子标题</h3>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -29,11 +31,24 @@
                         <h3 class="block-title">分类</h3>
 
                         <select name="categoryId" class="form-control input-sm validate[required]">
-                            <option value="1">分类1</option>
-                            <option value="2">分类2</option>
-                            <option value="3">分类3</option>
-                            <option value="4">分类4</option>
+                            <option value="0">顶层</option>
+                            @foreach( $categories as $item)
+                                <option value="{{$item->id}}">{{$item->html.$item->name}}</option>
+                            @endforeach
                         </select>
+                    </div>
+                </div>
+
+                <h3 class="block-title">加精和置顶</h3>
+
+                <div class="row">
+                    <div class="col-md-1">
+                        <label for="excellent">加精</label>
+                        <input type="checkbox" id="excellent" name="isExcellent" class="form-control m-b-8 ">
+                    </div>
+                    <div class="col-md-1">
+                        <label for="top">置顶</label>
+                        <input type="checkbox" id="top" name="isTop" class="form-control m-b-8 " >
                     </div>
                 </div>
 

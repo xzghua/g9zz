@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\Eloquent\ReplyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BackendController extends Controller
+class ReplyController extends Controller
 {
+    public $repository;
+
+    public function __construct(ReplyRepository $replyRepository)
+    {
+        $this->repository = $replyRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +22,8 @@ class BackendController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.'.set_theme().'.index');
+        $reply = $this->repository->paginate(per_page());
+        return view('admin.'.set_theme().'.reply.index',compact('reply'));
     }
 
     /**
@@ -25,7 +33,7 @@ class BackendController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,7 +44,18 @@ class BackendController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $faker = \Faker\Factory::create('zh_CN');
+        $input = [
+            'post_id' => rand(1,20),
+            'user_id' => 1,
+            'vote_count' => rand(1,100),
+            'body' => $faker->text(200),
+            'body_original' => $faker->text(200)
+        ];
+
+        $this->repository->create($input);
+
+
     }
 
     /**

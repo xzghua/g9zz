@@ -32,8 +32,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $paginate = $this->repository->paginate(per_page());
-
+        $paginate = $this->repository->with(['category'])->with(['author'])->with(['last_reply_user'])->paginate(per_page());
+        $categories = $this->categoryRepository->getCate();
+//        dd($paginate->toArray());
         return view('admin.'.set_theme().'.post.index',compact('paginate'));
     }
 
@@ -44,7 +45,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.'.set_theme().'.post.create');
+        $categories = $this->categoryRepository->getCate();
+        return view('admin.'.set_theme().'.post.create',compact('categories'));
     }
 
     /**
@@ -55,8 +57,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $input =  $request->only(['title','categoryId','content']);
+        $input =  $request->only(['title','categoryId','content','isExcellent','isTop']);
         $input = parse_input($input);
+
+        $input['is_excellent'] = !empty($input['is_excellent']) && $input['is_excellent'] == 'on' ? 'yes' : 'no';
+        $input['is_top'] = !empty($input['is_top']) && $input['is_top'] == 'on' ?  'yes' : 'no';
 
         \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
 
@@ -68,11 +73,11 @@ class PostController extends Controller
 
         $this->requestValidate($input,$rules,'post');
 
-        $input['user_id'] = 1;//作者名称
+        $input['user_id'] = rand(1,30);//作者名称
 
         $id = $this->repository->create($input);
 
-        return view('.admin.'.set_theme().'.post.create');
+        return redirect()->route('post.create');
     }
 
     /**
@@ -113,16 +118,20 @@ class PostController extends Controller
     {
         $this->repository->find($id);
 
-        $input = $request->only(['title','categoryId','content']);
+        $input =  $request->only(['title','categoryId','content','isExcellent','isTop']);
         $input = parse_input($input);
+
+        $input['is_excellent'] = !empty($input['is_excellent']) && $input['is_excellent'] == 'on' ? 'yes' : 'no';
+        $input['is_top'] = !empty($input['is_top']) && $input['is_top'] == 'on' ?  'yes' : 'no';
+
         \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
 
         $rules = [
             'title' => 'required',
-            'category_id' => 'required',//还需校验分类是否存在
+            'category_id' => 'required|exists:categories,id,'.$input['category_id'],//还需校验分类是否存在
 
         ];
-
+dd($input);
         $this->requestValidate($input,$rules,'post');
 
         $this->repository->update($input,$id);

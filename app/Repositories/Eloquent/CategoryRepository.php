@@ -20,15 +20,8 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         return Categories::class;
     }
 
-    public  function getCateArr()
+    public  function getCate()
     {
-        $cate = $this->model->all();
-        dd($cate);
-        $getTreeArr =  self::tree($cate);
-        foreach ($getTreeArr as $key => $value) {
-            $getTreeArr[$key]->newHtml = $value->html.$value->cate_name;
-        }
-
-        return $getTreeArr;
+        return $this->model->getCateArr();
     }
 }

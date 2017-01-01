@@ -16,8 +16,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('password');
-            $table->integer('github_id')->unique()->index();
-            $table->string('github_url');
+            $table->integer('github_id')->unique()->nullable()->index();
+            $table->string('github_url')->nullable();
             $table->string('email')->nullable()->index();
             $table->string('name')->nullable()->index();
             $table->string('login_token')->nullable();
@@ -33,12 +33,12 @@ class CreateUsersTable extends Migration
             $table->string('introduction')->nullable();
             $table->string('certification')->nullable();
             $table->integer('notification_count')->default(0);
-            $table->string('github_name')->index();
+            $table->string('github_name')->nullable()->index();
             $table->string('real_name')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('payment_qrcode')->nullable();
             $table->string('wechat_qrcode')->nullable();
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('login_qr')->nullable();
             $table->string('wechat_openid')->nullable()->index();
             $table->string('wechat_unionid')->nullable()->index();
@@ -47,7 +47,7 @@ class CreateUsersTable extends Migration
             $table->boolean('verified')->default(false)->index();
             $table->string('verification_token')->nullable();
             $table->enum('email_notify_enabled', ['yes',  'no'])->default('yes')->index();
-            $table->string('register_source')->index();
+            $table->string('register_source')->nullable()->index();
             $table->timestamp('last_actived_at')->nullable();
             $table->softDeletes();
             $table->rememberToken();

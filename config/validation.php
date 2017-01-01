@@ -16,7 +16,14 @@ return [
     'post' => [
         'title.required' => 401000000,
         'category_id.required' => 401000001,
+        'category_id.exists' => 401000002,
     ],
 
+    'category' => [
+        'parent_id.required' =>  402000000,
+        'name.required' =>  402000001,
+        'slug.max' =>  402000002,
+        'slug.unique' =>  402000003,
+    ],
 
 ];

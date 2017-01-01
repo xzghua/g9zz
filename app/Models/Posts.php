@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Users;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -56,7 +57,7 @@ class Posts extends Model
         'title','content','source','user_id',
         'category_id','reply_count','view_count','vote_count',
         'last_reply_user_id','order','is_excellent','is_blocked',
-        'body_original','excerpt','is_tagged',
+        'body_original','excerpt','is_tagged','is_top',
     ];
 
     public function tag()
@@ -66,6 +67,18 @@ class Posts extends Model
 
     public function category()
     {
-        return $this->hasOne(Categories::class,'category_id','id');
+        return $this->hasOne(Categories::class,'id','category_id');
     }
+
+    public function author()
+    {
+        return $this->hasOne(Users::class,'id','user_id');
+    }
+
+    public function last_reply_user()
+    {
+        return $this->hasOne(Users::class,'id','last_reply_user_id');
+    }
+
+
 }

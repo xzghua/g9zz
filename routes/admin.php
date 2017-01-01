@@ -19,4 +19,17 @@ Route::delete('post/{id}','PostController@destroy')->where('id','[0-9]+')->name(
 
 //Category
 Route::get('category','CategoryController@index')->name('category.index');
+Route::post('category','CategoryController@store')->name('category.store');
 Route::get('category/create','CategoryController@create')->name('category.create');
+Route::get('category/{id}/edit','CategoryController@edit')->where('id','[0-9]+')->name('category.edit');
+Route::put('category/{id}','CategoryController@update')->where('id','[0-9]+')->name('category.update');
+
+//Reply
+Route::get('reply','ReplyController@index')->name('reply.index');
+Route::post('reply','ReplyController@store')->name('reply.store');
+Route::get('reply/create','ReplyController@create')->name('reply.create');
+Route::get('reply/{id}/edit','ReplyController@edit')->where('id','[0-9]+')->name('reply.edit');
+Route::put('reply/{id}','ReplyController@update')->where('id','[0-9]+')->name('reply.update');
+
+
+Route::post('register','NewRegisterController@create')->name('user.register');

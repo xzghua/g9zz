@@ -18,7 +18,7 @@
     <div class="block-area" id="tableStriped">
         <h3 class="block-title">帖子列表</h3>
         <div class="table-responsive overflow">
-            <table class="table tile table-striped  table-hover ">
+            <table class="tile table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
                     <th>No.</th>
@@ -39,15 +39,25 @@
                 @foreach($paginate as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->user_id}}</td>
+                        <td>{{$item->author->name}}</td>
                         <td>{{$item->title}}</td>
-                        <td>分类{{$item->id}}</td>
-                        <td>{{rand(1,100)}}</td>
-                        <td>{{rand(1,100)}}</td>
-                        <td>{{rand(1,100)}} </td>
-                        <td>叶落</td>
-                        <td>是</td>
-                        <td>是</td>
+                        <td>{{$item->category->name}}</td>
+                        <td>{{$item->reply_count}}</td>
+                        <td>{{$item->view_count}}</td>
+                        <td>{{$item->vote_count}} </td>
+                        <td class="text-center">
+                            @if (!empty($item->last_reply_user))
+                                {{$item->last_reply_user->name}}
+                            @else
+                                --
+                            @endif
+                        </td>
+                        <td>
+                            {{$item->is_top == 'no' ? '否' : '是'}}
+                        </td>
+                        <td>
+                            {{$item->is_excellent == 'no' ? '否' : '是'}}
+                        </td>
                         <td>{{$item->created_at}}</td>
                         <td>
                             <button class="btn-primary"><a href="/admin/post/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
@@ -68,5 +78,6 @@
 @endsection
 
 @section('js')
-
+    {{--<script src="/admin/default/js/icheck.js"></script>--}}
+    {{--<script src="/admin/default/js/toggler.min.js"></script>--}}
 @endsection

@@ -1,9 +1,9 @@
 @extends('admin.default.master')
 
-@section('title','分类')
+@section('title','回复')
 
-@section('menu','分类')
-@section('page','分类列表')
+@section('menu','回复')
+@section('page','回复列表')
 
 @section('pageTitle','列表')
 
@@ -16,28 +16,38 @@
 
     <!-- Table Striped -->
     <div class="block-area" id="tableStriped">
-        <h3 class="block-title">分类列表</h3>
+        <h3 class="block-title">回复列表</h3>
         <div class="table-responsive overflow">
             <table class="tile table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
                     <th>No.</th>
-                    <th>分类名</th>
+                    <th>帖子名</th>
                     <th>缩略名</th>
-                    <th>描述</th>
+                    <th>用户名</th>
+                    <th>是否block</th>
+                    <th>回复数</th>
+                    <th>投票数</th>
+                    <th>回复内容</th>
+                    <th>内容原文</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($category as $item)
+                @foreach($reply as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->html.$item->name}}</td>
-                        <td>{{$item->slug}}</td>
-                        <td>{{$item->description}}</td>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->id}}</td>
                         <td>
-                            <button class="btn-primary"><a href="/admin/category/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
-                            <form action="/admin/category/{{$item->id}}" method="post">
+                            <button class="btn-primary"><a href="/admin/reply/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
+                            <form action="/admin/reply/{{$item->id}}" method="post">
                                 <input type="hidden" name="_method" value="delete">
                                 {!! csrf_field() !!}
                                 <button class="btn-danger"><span class="icon">&#61918;</span> 删除</button>

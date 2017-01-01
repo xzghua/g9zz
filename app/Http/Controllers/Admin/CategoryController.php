@@ -23,8 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = $this->repository->paginate(per_page());
-//        dd($this->repository->getCateArr());
+        $category = $this->repository->getCate();
         return view('admin.'.set_theme().'.category.index',compact('category'));
     }
 
@@ -35,7 +34,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.'.set_theme().'.category.create');
+        $category = $this->repository->getCate();
+        return view('admin.'.set_theme().'.category.create',compact('category'));
     }
 
     /**
@@ -46,7 +46,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->only(['parentId','name','slug','description']);
+        $input = parse_input($input);
+        \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
+
+        $rules = [
+            'parent_id' => 'required',
+            'name' => 'required',
+            'slug' => 'max:60|unique:categories',
+        ];
+
+        $this->requestValidate($input,$rules,'category');
+        $this->repository->create($input);
+        return  redirect()->route('category.index');
     }
 
     /**
@@ -68,7 +80,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category =  $this->repository->find($id);
+        $categories = $this->repository->getCate();
+        return view('admin.'.set_theme().'.category.edit',compact('category','categories'));
     }
 
     /**
@@ -80,7 +94,28 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->repository->find($id);
+
+        $input = $request->only(['parentId','name','slug','description']);
+        $input = parse_input($input);
+        \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
+
+        //如果自己选自己为父类是不允许的
+        if ($input['parent_id'] == $id) {
+            dd('不允许');
+        }
+
+        //自己不能改成自己的子类
+
+        $rules = [
+            'parent_id' => 'required',
+            'name' => 'required',
+            'slug' => 'max:60|unique:categories,slug,'.$id,
+        ];
+
+        $this->requestValidate($input,$rules,'category');
+        $this->repository->update($input,$id);
+        return  redirect()->route('category.index');
     }
 
     /**

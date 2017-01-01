@@ -38,6 +38,19 @@
                 </div>
             </div>
 
+            <h3 class="block-title">加精和置顶</h3>
+
+            <div class="row">
+                <div class="col-md-1">
+                    <label for="excellent">加精</label>
+                    <input type="checkbox" @if ($post->is_excellent == 'yes') checked @endif  id="excellent" name="isExcellent" class="form-control m-b-8 ">
+                </div>
+                <div class="col-md-1">
+                    <label for="top">置顶</label>
+                    <input type="checkbox" @if ($post->is_top == 'yes') checked @endif  id="top" name="isTop" class="form-control m-b-8 " >
+                </div>
+            </div>
+
             <h3 class="block-title">帖子内容</h3>
             <br/>
             <p>请使用markdown语法</p>

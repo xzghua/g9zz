@@ -167,35 +167,43 @@
                 <ul class="list-unstyled menu-item">
                     <li><a href="/admin/post" class="@if (\Request::getRequestUri() == '/admin/post') active @endif">列表</a></li>
                     <li><a href="/admin/post/create">创建帖子</a></li>
-                    <li><a href="/admin/index">Form Examples</a></li>
-                    <li><a href="/admin/index">Form Validation</a></li>
                 </ul>
             </li>
 
             {{--分类--}}
             <li class="dropdown @if (\Request::getRequestUri() == '/admin/category') active @endif" >
-                <a class="sa-side-table" href="">
+                <a class="sa-side-typography" href="">
                     <span class="menu-item">分类</span>
                 </a>
                 <ul class="list-unstyled menu-item">
                     <li><a href="/admin/category" class="@if (\Request::getRequestUri() == '/admin/category') active @endif">分类列表</a></li>
                     <li><a href="/admin/category/create">创建分类</a></li>
-                    <li><a href="/admin/category">Form Examples</a></li>
-                    <li><a href="/admin/category">Form Validation</a></li>
+                </ul>
+            </li>
+
+            {{--回复--}}
+            <li class="dropdown @if (\Request::getRequestUri() == '/admin/reply') active @endif" >
+                <a class="sa-side-widget" href="">
+                    <span class="menu-item">回复</span>
+                </a>
+                <ul class="list-unstyled menu-item">
+                    <li><a href="/admin/reply" class="@if (\Request::getRequestUri() == '/admin/reply') active @endif">回复列表</a></li>
+                    <li><a href="/admin/reply/create">新建回复</a></li>
                 </ul>
             </li>
 
 
-            <li>
-                <a class="sa-side-typography" href="typography.html">
-                    <span class="menu-item">Typography</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-widget" href="content-widgets.html">
-                    <span class="menu-item">Widgets</span>
-                </a>
-            </li>
+
+            {{--<li>--}}
+                {{--<a class="sa-side-typography" href="typography.html">--}}
+                    {{--<span class="menu-item">Typography</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a class="sa-side-widget" href="content-widgets.html">--}}
+                    {{--<span class="menu-item">Widgets</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
             <li>
                 <a class="sa-side-table" href="tables.html">
                     <span class="menu-item">Tables</span>

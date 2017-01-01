@@ -3,15 +3,13 @@
  * Created by PhpStorm.
  * User: ylsc633@gmail.com
  * Date: 17-1-1
- * Time: 下午5:06
+ * Time: 下午11:21
  */
 
 namespace App\Repositories\Contracts;
 
 
-interface CategoryRepositoryInterface extends BaseRepositoryInterface
+interface ReplyRepositoryInterface extends BaseRepositoryInterface
 {
-
-    public function getCate();
 
 }

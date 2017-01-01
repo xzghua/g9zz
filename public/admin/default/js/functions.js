@@ -69,6 +69,7 @@ $(document).ready(function(){
 	var skin = $(this).data('skin');
 	$('body').attr('id', skin);
 	$('#changeSkin').modal('hide');
+		setCookie('background-image',skin,-1);
 		setCookie('background-image',skin,30);
     });
 

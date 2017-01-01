@@ -25,7 +25,8 @@ class CreatePostsTable extends Migration
             $table->integer('vote_count')->default(0)->comment('点赞数')->index();
             $table->integer('last_reply_user_id')->unsigned()->comment('最后回复人的ID')->default(0)->index();
             $table->integer('order')->default(0)->index();
-            $table->enum('is_excellent', ['yes',  'no'])->comment('是否置顶')->default('no')->index();
+            $table->enum('is_top', ['yes',  'no'])->comment('是否置顶')->default('no')->index();
+            $table->enum('is_excellent', ['yes',  'no'])->comment('是否加精')->default('no')->index();
             $table->enum('is_blocked', ['yes',  'no'])->comment('是否block')->default('no')->index();
             $table->text('body_original')->comment('原内容')->nullable();
             $table->text('excerpt')->nullable()->comment('摘要');
