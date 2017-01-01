@@ -38,4 +38,22 @@ class Categories extends Model
         'parent_id','post_count','weight','name',
         'slug','description',
     ];
+
+
+    public static function tree($model, $parentId = 0, $level = 0, $html = '-')
+    {
+        $data = array();
+        foreach ($model as $k => $v) {
+            if ($v->parent_id == $parentId) {
+                if ($level != 0) {
+                    $v->html = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $level);
+                    $v->html .= '|';
+                }
+                $v->html .= str_repeat($html, $level);
+                $data[] = $v;
+                $data = array_merge($data, self::tree($model, $v->id, $level + 1));
+            }
+        }
+        return $data;
+    }
 }

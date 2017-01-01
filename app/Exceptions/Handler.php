@@ -23,6 +23,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
         ValidatorException::class,
+        DataNullException::class,
     ];
 
     /**
@@ -53,6 +54,10 @@ class Handler extends ExceptionHandler
             return  response()->json(['message' => config('message.'.$code),'code' => $code]);
         }
 
+//        if ($exception instanceof Exception) {
+//            $code = $exception->getCode();
+//            return  response()->json(['message' => config('message.'.$code),'code' => $code]);
+//        }
 
 
         return parent::render($request, $exception);

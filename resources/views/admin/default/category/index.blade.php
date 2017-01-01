@@ -1,9 +1,9 @@
-@extends('admin.master')
+@extends('admin.default.master')
 
-@section('title','帖子')
+@section('title','分类')
 
-@section('menu','帖子')
-@section('page','帖子列表')
+@section('menu','分类')
+@section('page','分类列表')
 
 @section('pageTitle','列表')
 
@@ -16,7 +16,7 @@
 
     <!-- Table Striped -->
     <div class="block-area" id="tableStriped">
-        <h3 class="block-title">Table Striped</h3>
+        <h3 class="block-title">分类列表</h3>
         <div class="table-responsive overflow">
             <table class="table tile table-striped  table-hover ">
                 <thead>
@@ -36,11 +36,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($paginate as $item)
+                @foreach($category as $item)
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->user_id}}</td>
-                        <td>09/04/2012</td>
+                        <td>{{$item->title}}</td>
                         <td>分类{{$item->id}}</td>
                         <td>{{rand(1,100)}}</td>
                         <td>{{rand(1,100)}}</td>
@@ -50,8 +50,12 @@
                         <td>是</td>
                         <td>{{$item->created_at}}</td>
                         <td>
-                            <button class="btn-primary">  <span class="icon">&#61952;</span> Button</button>
-                            <button class="btn-danger"> <span class="icon">&#61918;</span> Button</button>
+                            <button class="btn-primary"><a href="/admin/post/{{$item->id}}">  <span class="icon">&#61952;</span> 修改</a></button>
+                            <form action="/admin/post/{{$item->id}}" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                {!! csrf_field() !!}
+                                <button class="btn-danger"><span class="icon">&#61918;</span> 删除</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -64,5 +68,5 @@
 @endsection
 
 @section('js')
-    
+
 @endsection

@@ -159,6 +159,7 @@
                 </a>
             </li>
 
+            {{--帖子--}}
             <li class="dropdown @if (\Request::getRequestUri() == '/admin/post') active @endif" >
                 <a class="sa-side-table" href="">
                     <span class="menu-item">帖子</span>
@@ -170,6 +171,20 @@
                     <li><a href="/admin/index">Form Validation</a></li>
                 </ul>
             </li>
+
+            {{--分类--}}
+            <li class="dropdown @if (\Request::getRequestUri() == '/admin/category') active @endif" >
+                <a class="sa-side-table" href="">
+                    <span class="menu-item">分类</span>
+                </a>
+                <ul class="list-unstyled menu-item">
+                    <li><a href="/admin/category" class="@if (\Request::getRequestUri() == '/admin/category') active @endif">分类列表</a></li>
+                    <li><a href="/admin/category/create">创建分类</a></li>
+                    <li><a href="/admin/category">Form Examples</a></li>
+                    <li><a href="/admin/category">Form Validation</a></li>
+                </ul>
+            </li>
+
 
             <li>
                 <a class="sa-side-typography" href="typography.html">

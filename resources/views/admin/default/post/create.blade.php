@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('admin.default.master')
 
 @section('title','帖子')
 

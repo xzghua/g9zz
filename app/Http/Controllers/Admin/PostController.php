@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\PostRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,10 +15,12 @@ class PostController extends Controller
 
     public $repository;
 
+    public $categoryRepository;
 
-    public function __construct(PostRepository $repository)
+    public function __construct(PostRepository $repository,CategoryRepository $categoryRepository)
     {
         $this->repository = $repository;
+        $this->categoryRepository = $categoryRepository;
     }
 
 
@@ -29,11 +32,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $paginate = $this->repository->paginate(per_page());
 
-        $paginate = $this->repository->paginate();
-
-        return view('admin.post.index',compact('paginate'));
+        return view('admin.'.set_theme().'.post.index',compact('paginate'));
     }
 
     /**
@@ -43,9 +44,7 @@ class PostController extends Controller
      */
     public function create()
     {
-
-
-        return view('admin.post.create');
+        return view('admin.'.set_theme().'.post.create');
     }
 
     /**
@@ -73,7 +72,7 @@ class PostController extends Controller
 
         $id = $this->repository->create($input);
 
-        return view('admin.post.create');
+        return view('.admin.'.set_theme().'.post.create');
     }
 
     /**
@@ -84,7 +83,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -95,7 +94,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = $this->repository->find($id);
+
+        $categories = $this->categoryRepository->all();
+
+        return view('admin.'.set_theme().'.post.edit',compact('post','categories'));
+
     }
 
     /**
@@ -107,7 +111,24 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->repository->find($id);
+
+        $input = $request->only(['title','categoryId','content']);
+        $input = parse_input($input);
+        \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
+
+        $rules = [
+            'title' => 'required',
+            'category_id' => 'required',//还需校验分类是否存在
+
+        ];
+
+        $this->requestValidate($input,$rules,'post');
+
+        $this->repository->update($input,$id);
+
+        return redirect()->route('post.index');
+
     }
 
     /**
@@ -119,5 +140,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        dd($id,222222);
     }
 }

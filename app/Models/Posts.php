@@ -58,4 +58,14 @@ class Posts extends Model
         'last_reply_user_id','order','is_excellent','is_blocked',
         'body_original','excerpt','is_tagged',
     ];
+
+    public function tag()
+    {
+        return $this->hasMany(Tags::class);
+    }
+
+    public function category()
+    {
+        return $this->hasOne(Categories::class,'category_id','id');
+    }
 }
