@@ -12,6 +12,13 @@ use App\Exceptions\ValidatorException;
 
 trait Respond
 {
+    public $code;
+
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
     public function requestValidate(array $data, array $rules, $key = 'default')
     {
         $validation = config('validation');
@@ -23,4 +30,10 @@ trait Respond
             throw new ValidatorException($code);
         }
     }
+
+    public function pushError($code)
+    {
+        throw new ValidatorException($code);
+    }
+
 }

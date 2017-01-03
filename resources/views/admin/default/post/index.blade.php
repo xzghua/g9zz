@@ -81,5 +81,5 @@
 @endsection
 
 @section('js')
-
+    {!! reminder()->message() !!}
 @endsection

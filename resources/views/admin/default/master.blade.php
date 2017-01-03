@@ -19,6 +19,7 @@
     <link href="/admin/default/css/style.css" rel="stylesheet">
     <link href="/admin/default/css/icons.css" rel="stylesheet">
     <link href="/admin/default/css/generics.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 </head>
 <body id="skin-blur-violate">
 
@@ -612,6 +613,7 @@
 <script src="/admin/default/js/scroll.min.js"></script> <!-- Custom Scrollbar -->
 
 <!-- Other -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> <!-- Calendar -->
 <script src="/admin/default/js/calendar.min.js"></script> <!-- Calendar -->
 {{--<script src="/admin/default/js/feeds.min.js"></script> <!-- News Feeds -->--}}
 

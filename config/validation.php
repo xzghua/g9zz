@@ -24,6 +24,9 @@ return [
         'name.required' =>  402000001,
         'slug.max' =>  402000002,
         'slug.unique' =>  402000003,
+        'name.unique' =>  402000004,
+        'slug.regex' =>  402000005,
+        'parent.error' =>  402000006,
     ],
 
     'reply' => [

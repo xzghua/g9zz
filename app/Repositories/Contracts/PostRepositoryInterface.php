@@ -10,4 +10,6 @@ namespace App\Repositories\Contracts;
 interface PostRepositoryInterface extends BaseRepositoryInterface
 {
     public function getAll();
+
+    public function getPostListByCateList($cateList);
 }

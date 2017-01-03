@@ -171,7 +171,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         //调试工具
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
-
+        //提示
+        Rry\Reminder\ReminderServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Clockwork' => Clockwork\Support\Laravel\Facade::class,
+        'Reminder'  => Rry\Reminder\ReminderFacade::class,
     ],
 
 ];

@@ -40,9 +40,9 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="block-title">缩略名</h3>
-
-                    <input type="text" name="slug" class="form-control m-b-8 input-sm " placeholder="请输入缩略名">
+                    <h3 class="block-title">slug</h3>
+                    <i>请输入英文</i>
+                    <input type="text" name="slug" class="form-control m-b-8 input-sm validate[required]" placeholder="请输入slug">
                 </div>
             </div>
 
@@ -71,5 +71,5 @@
     <script src="/admin/default/js/validation/validationEngine.min.js"></script>
     <script src="/admin/default/js/select.min.js"></script>
     <script src="/admin/default/js/markdown.min.js"></script>
-
+    {!! reminder()->message() !!}
 @endsection

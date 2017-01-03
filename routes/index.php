@@ -7,3 +7,7 @@
  */
 
 Route::post('/post/{id}/vote','PostController@vote')->where('id','[0-9]+')->name('post.vote');
+
+Route::get('/','IndexController@index');
+//Route::get('/post','IndexController@postList');
+Route::get('/post/{cate_name}','IndexController@postList');

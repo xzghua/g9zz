@@ -24,4 +24,9 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         // TODO: Implement getAll() method.
         return 1111;
     }
+
+    public function getPostListByCateList($cateList)
+    {
+        return $this->model->whereIn('category_id',$cateList)->get();
+    }
 }

@@ -34,7 +34,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $category = $this->repository->getCate();
+        $category = $this->repository->getTopCate();
         return view('admin.'.set_theme().'.category.create',compact('category'));
     }
 
@@ -52,13 +52,28 @@ class CategoryController extends Controller
 
         $rules = [
             'parent_id' => 'required',
-            'name' => 'required',
-            'slug' => 'max:60|unique:categories',
+            'name' => 'required|unique:categories',
+            'slug' => 'max:60|unique:categories|regex:/^[a-zA-Z0-9]+$/',
         ];
 
+
         $this->requestValidate($input,$rules,'category');
+        $input['parent_id'] = 22;
+        if ($input['parent_id'] != 0){
+            $input['weight'] = 1;
+            $parentId =  $this->repository->checkParentId($input['parent_id']);
+            if ($parentId != 0) {
+                $code = config('validation')['category']['parent.error'];
+                $this->pushError($code);
+            }
+        }
+        
         $this->repository->create($input);
-        return  redirect()->route('category.index');
+        reminder()->success('分类创建成功','创建成功');
+
+        $category = $this->repository->getCate();
+        return view('admin.'.set_theme().'.category.index',compact('category'));
+
     }
 
     /**
@@ -100,12 +115,12 @@ class CategoryController extends Controller
         $input = parse_input($input);
         \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
 
-        //如果自己选自己为父类是不允许的
+        // TODO :   如果自己选自己为父类是不允许的
         if ($input['parent_id'] == $id) {
             dd('不允许');
         }
 
-        //自己不能改成自己的子类
+        // TODO : 自己不能改成自己的子类
 
         $rules = [
             'parent_id' => 'required',
@@ -115,6 +130,8 @@ class CategoryController extends Controller
 
         $this->requestValidate($input,$rules,'category');
         $this->repository->update($input,$id);
+        reminder()->success('分类修改成功','修改成功');
+
         return  redirect()->route('category.index');
     }
 

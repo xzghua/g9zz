@@ -68,5 +68,5 @@
     <script src="/admin/default/js/validation/validationEngine.min.js"></script>
     <script src="/admin/default/js/select.min.js"></script>
     <script src="/admin/default/js/markdown.min.js"></script>
-
+    {!! reminder()->message() !!}
 @endsection

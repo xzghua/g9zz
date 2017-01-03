@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb6a3e0a8ab344ce892018ed1747cd4c",
-    "content-hash": "4bbd669b50edb525ff45bf489c59ee4d",
+    "hash": "c4020692756d040fa84a2955865d55ea",
+    "content-hash": "f14014f9a22ce3218f5e0d0c1a8a68cf",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -1608,6 +1608,45 @@
                 "uuid"
             ],
             "time": "2016-11-22 19:21:44"
+        },
+        {
+            "name": "rry/reminder",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RryLee/laravel-reminder.git",
+                "reference": "793339b14bda329a413b4c929f70532d2e68f0a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/RryLee/laravel-reminder/793339b14bda329a413b4c929f70532d2e68f0a7.zip",
+                "reference": "793339b14bda329a413b4c929f70532d2e68f0a7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rry\\Reminder\\": "src/"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "RryLee",
+                    "email": "rrylee1994@gmail.com"
+                }
+            ],
+            "description": "A awesome message reminder build with toastr for laravel5.*",
+            "time": "2015-11-21 04:49:19"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -48,6 +48,26 @@ if (!function_exists('set_theme')) {
 }
 
 /**
+ * 设置前台主题
+ * @date 2017年01月02日15:00:54
+ */
+if (!function_exists('set_index_theme')) {
+    function set_index_theme($theme = 'default')
+    {
+        return $theme;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/**
  * 截取带有HTML标签的字符串(非原创)
  */
 if (!function_exists('cut_html_str')) {

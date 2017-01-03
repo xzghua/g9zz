@@ -10,7 +10,8 @@
         "barryvdh/laravel-ide-helper": "^2.2",
         "doctrine/dbal": "^2.5",
         "itsgoingd/clockwork": "~1.11.1",
-        "bosnadev/repositories": " 0.*"
+        "bosnadev/repositories": " 0.*",
+        "rry/reminder": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

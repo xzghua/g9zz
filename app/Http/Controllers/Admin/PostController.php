@@ -74,6 +74,7 @@ class PostController extends Controller
         $input['user_id'] = rand(1,30);//作者名称
         $input['body_original'] = $input['content'];
         $id = $this->repository->create($input);
+        reminder()->success('创建帖子成功','创建成功');
 
         return redirect()->route('post.create');
     }
@@ -131,6 +132,7 @@ class PostController extends Controller
         $this->requestValidate($input,$rules,'post');
 
         $this->repository->update($input,$id);
+        reminder()->success('分类创建成功','创建成功');
 
         return redirect()->route('post.index');
 
