@@ -58,8 +58,8 @@ class CategoryController extends Controller
 
 
         $this->requestValidate($input,$rules,'category');
-
         $input['is_show'] = !empty($input['is_show']) && $input['is_show'] == 'on' ? 'yes' : 'no';
+        $this->checkCateShow($input);
 
         if ($input['parent_id'] != 0){
             $input['weight'] = 1;
@@ -126,15 +126,16 @@ class CategoryController extends Controller
             'slug' => 'max:60|unique:categories,slug,'.$id.'|regex:/^[a-zA-Z0-9]+$/',
         ];
 
+        $this->requestValidate($input,$rules,'category');
+
+        $input['is_show'] = !empty($input['is_show']) && $input['is_show'] == 'on' ? 'yes' : 'no';
+        $this->checkCateShow($input);
         $parentId = $this->repository->checkParentId($input['parent_id']);
         if ($parentId != 0) {
             $code = config('validation')['category']['parent.error'];
             $this->pushError($code);
         }
 
-        $this->requestValidate($input,$rules,'category');
-
-        $input['is_show'] = !empty($input['is_show']) && $input['is_show'] == 'on' ? 'yes' : 'no';
 
         $this->repository->update($input,$id);
         reminder()->success('分类修改成功','修改成功');
@@ -151,5 +152,22 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 分类的is_show 在该分类下总共显示数不能超过n个(n在config/g9zz.php里的cate_show_max_count进行配置)
+     *
+     * @param $input
+     */
+    public function checkCateShow($input)
+    {
+        //TM的显示不能超过十个!
+        if ($input['is_show'] == 'yes' && $input['parent_id'] != 0) {
+            $shows = $this->repository->getAllIsShowCate($input['parent_id']);
+            if (count($shows) > config('g9zz')['cate_show_max_count']) {
+                $code = config('validation')['category']['showMaxCount.error'];
+                $this->pushError($code);
+            }
+        }
     }
 }

@@ -33,9 +33,10 @@
                         {{--<li class="popover-with-html" data-content="点赞数排序"><a href="topics?filter=vote">投票</a></li>--}}
 
                     {{--</ul>--}}
-
-                    <li class="popover-with-html" data-content="发布时间排序"><a href="topics?filter=recent">最近</a></li>
-                    <li class="popover-with-html" data-content="无人问津的话题"><a href="topics?filter=noreply1">零回复</a></li>
+                    @foreach($cateShow as $value)
+                        <li class="popover-with-html" data-content="{{$value->name}}"><a href="{{url()->current()}}?cate={{$value->slug}}"  @if (url()->current()."?cate=".$value->slug == url()->full()) class="active" @endif>{{$value->name}}</a></li>
+                    @endforeach
+                    {{--<li class="popover-with-html" data-content="无人问津的话题"><a href="topics?filter=noreply1">零回复</a></li>--}}
                 </ul>
 
 

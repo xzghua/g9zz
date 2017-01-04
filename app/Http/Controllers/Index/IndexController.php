@@ -33,11 +33,19 @@ class IndexController extends Controller
     public function postList($cate_slug)
     {
         $slugId  = $this->categoryRepository->checkSlugExists($cate_slug);
+
         if (empty($slugId)) $this->indexPushError();
+
+        $request = \Request::only(['filter','cate']);
+
+        if (!empty($request['cate'])) {
+            $cate_slug = $request['cate'];
+        }
+
+        $cateShow = $this->categoryRepository->getAllIsShowCateByCateSlug($cate_slug);//该分类或者该父分类下所有的is_show列表
         $cateList = $this->categoryRepository->getPostListByCateSlug($cate_slug);
         $postList = $this->postRepository->getPostListByCateList($cateList);
 
-        $request = \Request::only(['filter']);
         if ($request['filter'] == 'excellent') {
             $postList = $postList->where('is_excellent','yes');
         }
@@ -48,7 +56,7 @@ class IndexController extends Controller
             ->with('author')
             ->with('last_reply_user')
             ->paginate(per_page());
-        return view('index.'.set_index_theme().'.post.index',compact('postList'));
+        return view('index.'.set_index_theme().'.post.index',compact('postList','cateShow'));
     }
 
 }

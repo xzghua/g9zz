@@ -25,4 +25,8 @@ interface CategoryRepositoryInterface extends BaseRepositoryInterface
     public function checkParentId($parentId);
 
     public function checkSlugExists($cateSlug);
+
+    public function getAllIsShowCate($parentId);
+
+    public function getAllIsShowCateByCateSlug($cateSlug);
 }

@@ -30,6 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Replies whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Replies whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Replies whereUpdatedAt($value)
+ * @property-read \App\Models\Posts $post
+ * @property-read \App\Models\Users $reply_user
  */
 class Replies extends Model
 {

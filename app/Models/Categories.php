@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Categories whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Categories whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Categories whereDeletedAt($value)
+ * @property string $is_show
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Categories whereIsShow($value)
  */
 class Categories extends Model
 {
@@ -36,7 +38,7 @@ class Categories extends Model
 
     protected $fillable = [
         'parent_id','post_count','weight','name',
-        'slug','description',
+        'slug','description','is_show'
     ];
 
 

@@ -28,6 +28,7 @@ return [
         'slug.regex' =>  402000005,
         'parent.error' =>  402000006,
         'parentEqualToSelf.error' =>  402000007,
+        'showMaxCount.error' =>  402000008,
     ],
 
     'reply' => [

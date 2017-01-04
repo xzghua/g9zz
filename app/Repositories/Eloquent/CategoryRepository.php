@@ -93,9 +93,42 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         return $this->model->whereId($parentId)->value('parent_id');
     }
 
-
+    /**
+     * 通过分类slug校验分类是否存在
+     *
+     * @param $cateSlug
+     * @return mixed
+     */
     public function checkSlugExists($cateSlug)
     {
         return $this->model->whereSlug($cateSlug)->value('id');
+    }
+
+    /**
+     * 获取is_show为'yes'的该分类下的所有和
+     *
+     * @param $parentId
+     * @return mixed
+     */
+    public function getAllIsShowCate($parentId)
+    {
+        $childCate = $this->model->whereParentId($parentId)->whereIsShow('yes')->pluck('id')->toArray();
+        $cate = $this->model->whereId($parentId)->first()->toArray();
+        if ($cate['is_show'] == 'yes') {
+            array_push($childCate,$cate['id']);
+        }
+        return $childCate;
+    }
+
+    public function getAllIsShowCateByCateSlug($cateSlug)
+    {
+        $cate = $this->model->whereSlug($cateSlug)->first();
+        if ($cate->parent_id != 0) {
+            $id = $cate->parent_id;
+        } else {
+            $id = $cate->id;
+        }
+
+        return $this->model->whereParentId($id)->whereIsShow('yes')->get();
     }
 }

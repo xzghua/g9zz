@@ -47,6 +47,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Posts whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Posts whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Posts whereUpdatedAt($value)
+ * @property string $is_top 是否置顶
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tags[] $tag
+ * @property-read \App\Models\Categories $category
+ * @property-read \App\Models\Users $author
+ * @property-read \App\Models\Users $last_reply_user
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Posts whereIsTop($value)
  */
 class Posts extends Model
 {
