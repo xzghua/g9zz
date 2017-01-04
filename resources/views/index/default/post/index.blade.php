@@ -15,13 +15,29 @@
 
             <div class="panel-heading">
 
+                {{--<ul class="list-inline topic-filter">--}}
+                    {{--<li class="popover-with-html" data-content="最后回复排序"><a href="topics?filter=default" class="active">活跃</a></li>--}}
+                    {{--<li class="popover-with-html" data-content="只看加精的话题"><a href="topics?filter=excellent">精华</a></li>--}}
+                    {{--<li class="popover-with-html" data-content="点赞数排序"><a href="topics?filter=vote">投票</a></li>--}}
+                    {{--<li class="popover-with-html" data-content="发布时间排序"><a href="topics?filter=recent">最近</a></li>--}}
+                    {{--<li class="popover-with-html" data-content="无人问津的话题"><a href="topics?filter=noreply1">零回复</a></li>--}}
+                {{--</ul>--}}
+
                 <ul class="list-inline topic-filter">
-                    <li class="popover-with-html" data-content="最后回复排序"><a href="topics?filter=default" class="active">活跃</a></li>
-                    <li class="popover-with-html" data-content="只看加精的话题"><a href="topics?filter=excellent">精华</a></li>
-                    <li class="popover-with-html" data-content="点赞数排序"><a href="topics?filter=vote">投票</a></li>
+                    <li class="popover-with-html" data-content="当前分类下の所有"><a href="{{url()->current()}}"  @if (url()->current() == url()->full()) class="active" @endif >全部</a></li>
+                    <li class="popover-with-html" data-content="精华的话题"><a href="{{url()->current()}}?filter=excellent" @if (url()->current().'?filter=excellent' == url()->full()) class="active" @endif>精华</a></li>
+
+                    {{--<ul class="list-inline topic-filter">--}}
+                        {{--<li class="popover-with-html" data-content="点赞数排序"><a href="topics?filter=vote">投票</a></li>--}}
+                        {{--<li class="popover-with-html" data-content="点赞数排序"><a href="topics?filter=vote">投票</a></li>--}}
+                        {{--<li class="popover-with-html" data-content="点赞数排序"><a href="topics?filter=vote">投票</a></li>--}}
+
+                    {{--</ul>--}}
+
                     <li class="popover-with-html" data-content="发布时间排序"><a href="topics?filter=recent">最近</a></li>
                     <li class="popover-with-html" data-content="无人问津的话题"><a href="topics?filter=noreply1">零回复</a></li>
                 </ul>
+
 
                 <div class="clearfix"></div>
             </div>
@@ -30,137 +46,56 @@
             <div class="panel-body remove-padding-horizontal">
                 <ul class="list-group row topic-list">
 
-                    <li class="list-group-item media" style="margin-top: 0px;">
+                    @foreach($postList as $item)
+                        <li class="list-group-item media" style="margin-top: 0px;">
 
-                        <a class="reply_last_time hidden-xs" href="topics/172">
-                            <img class="user_small_avatar avatar-circle" src="https://avatars1.githubusercontent.com/u/13896147?v=2&amp;s=100">
+                            <a class="reply_last_time hidden-xs" href="topics/172">
+                                <img class="user_small_avatar avatar-circle" src="{{empty($item->last_reply_user) || empty($item->last_reply_user->avatar) ?  'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2720246094,3678904868&fm=21&gp=0.jpg' : $item->last_reply_user->avatar}}">
 
-                            <span class="timeago">2016-12-16 18:09:30</span>
-                        </a>
-
-                        <div class="avatar pull-left">
-                            <a href="users/51">
-                                <img class="media-object img-thumbnail avatar avatar-middle" alt="叶落" src="http://www.g9zz.com/uploads/avatars/51_1480773038.png?imageView2/1/w/100/h/100"/>
+                                <span class="timeago">{{$item->created_at}}</span>
                             </a>
-                        </div>
 
-                        <div class="reply_count_area hidden-xs" >
-                            <div class="count_of_votes" title="投票数">
-                                2
-                            </div>
-                            <div class="count_set">
-                    <span class="count_of_replies" title="回复数">
-                      5
-                    </span>
-                                <span class="count_seperator">/</span>
-                                <span class="count_of_visits" title="查看数">
-                      38
-                    </span>
-                            </div>
-                        </div>
-
-                        <div class="infos">
-
-                            <div class="media-heading">
-
-                                <span class="hidden-xs label label-default">问答</span>
-
-                                <a href="topics/172" title="有个问题">
-                                    有个问题
+                            <div class="avatar pull-left">
+                                <a href="/">
+                                    <img class="media-object img-thumbnail avatar avatar-middle" alt="{{$item->author->name}}" src="{{isset($item->author->avatar) ? $item->author->avatar : 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1693841294,2799914919&fm=21&gp=0.jpg'}}"/>
                                 </a>
                             </div>
 
-                        </div>
-
-                    </li>
-
-                    <li class="list-group-item media" style="margin-top: 0px;">
-
-                        <a class="reply_last_time hidden-xs" href="topics/170">
-                            <img class="user_small_avatar avatar-circle" src="http://www.g9zz.com/uploads/avatars/51_1480773038.png?imageView2/1/w/100/h/100">
-
-                            <span class="timeago">2016-12-15 17:24:14</span>
-                        </a>
-
-                        <div class="avatar pull-left">
-                            <a href="users/50">
-                                <img class="media-object img-thumbnail avatar avatar-middle" alt="叶落山城" src="https://avatars2.githubusercontent.com/u/13896147?v=2&amp;s=100"/>
-                            </a>
-                        </div>
-
-                        <div class="reply_count_area hidden-xs" >
-                            <div class="count_of_votes" title="投票数">
-                                2
-                            </div>
-                            <div class="count_set">
-                    <span class="count_of_replies" title="回复数">
-                      5
-                    </span>
-                                <span class="count_seperator">/</span>
-                                <span class="count_of_visits" title="查看数">
-                      57
-                    </span>
-                            </div>
-                        </div>
-
-                        <div class="infos">
-
-                            <div class="media-heading">
-
-                                <span class="hidden-xs label label-default">知乎</span>
-
-                                <a href="topics/170" title="对于这个 g9zz 网,你怎么看">
-                                    对于这个 g9zz 网,你怎么看
-                                </a>
+                            <div class="reply_count_area hidden-xs" >
+                                <div class="count_of_votes" title="投票数">
+                                    {{$item->vote_count}}
+                                </div>
+                                <div class="count_set">
+                                <span class="count_of_replies" title="回复数">
+                                    {{$item->reply_count}}
+                                </span>
+                                    <span class="count_seperator">/</span>
+                                    <span class="count_of_visits" title="查看数">
+                                    {{$item->view_count}}
+                                </span>
+                                </div>
                             </div>
 
-                        </div>
+                            <div class="infos">
 
-                    </li>
+                                <div class="media-heading">
 
-                    <li class="list-group-item media" style="margin-top: 0px;">
+                                    <span class="hidden-xs label label-default">{{$item->category->name}}</span>
 
-                        <a class="reply_last_time hidden-xs" href="topics/171">
-                            <img class="user_small_avatar avatar-circle" src="https://avatars1.githubusercontent.com/u/13896147?v=2&amp;s=100">
+                                    <a href="{{$item->id}}" title="{{$item->title}}">
+                                        {{$item->title}}
+                                    </a>
+                                </div>
 
-                            <span class="timeago">2016-12-04 01:09:45</span>
-                        </a>
-
-                        <div class="avatar pull-left">
-                            <a href="users/51">
-                                <img class="media-object img-thumbnail avatar avatar-middle" alt="叶落" src="http://www.g9zz.com/uploads/avatars/51_1480773038.png?imageView2/1/w/100/h/100"/>
-                            </a>
-                        </div>
-
-                        <div class="reply_count_area hidden-xs" >
-                            <div class="count_of_votes" title="投票数">
-                                1
-                            </div>
-                            <div class="count_set">
-                    <span class="count_of_replies" title="回复数">
-                      1
-                    </span>
-                                <span class="count_seperator">/</span>
-                                <span class="count_of_visits" title="查看数">
-                      43
-                    </span>
-                            </div>
-                        </div>
-
-                        <div class="infos">
-
-                            <div class="media-heading">
-
-                                <span class="hidden-xs label label-default">教程</span>
-
-                                <a href="topics/171" title="这是个教程">
-                                    这是个教程
-                                </a>
                             </div>
 
-                        </div>
+                        </li>
 
-                    </li>
+
+
+                    @endforeach
+
+
                 </ul>
 
             </div>

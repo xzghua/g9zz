@@ -46,7 +46,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->only(['parentId','name','slug','description']);
+        $input = $request->only(['parentId','name','slug','description','isShow']);
         $input = parse_input($input);
         \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
 
@@ -58,7 +58,9 @@ class CategoryController extends Controller
 
 
         $this->requestValidate($input,$rules,'category');
-        $input['parent_id'] = 22;
+
+        $input['is_show'] = !empty($input['is_show']) && $input['is_show'] == 'on' ? 'yes' : 'no';
+
         if ($input['parent_id'] != 0){
             $input['weight'] = 1;
             $parentId =  $this->repository->checkParentId($input['parent_id']);
@@ -67,11 +69,9 @@ class CategoryController extends Controller
                 $this->pushError($code);
             }
         }
-        
+
         $this->repository->create($input);
         reminder()->success('分类创建成功','创建成功');
-
-        $category = $this->repository->getCate();
         return view('admin.'.set_theme().'.category.index',compact('category'));
 
     }
@@ -111,24 +111,31 @@ class CategoryController extends Controller
     {
         $this->repository->find($id);
 
-        $input = $request->only(['parentId','name','slug','description']);
+        $input = $request->only(['parentId','name','slug','description','isShow']);
         $input = parse_input($input);
         \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
 
-        // TODO :   如果自己选自己为父类是不允许的
         if ($input['parent_id'] == $id) {
-            dd('不允许');
+            $code = config('validation')['category']['parentEqualToSelf.error'];
+            $this->pushError($code);
         }
-
-        // TODO : 自己不能改成自己的子类
 
         $rules = [
             'parent_id' => 'required',
-            'name' => 'required',
-            'slug' => 'max:60|unique:categories,slug,'.$id,
+            'name' => 'required|unique:categories,name,'.$id,
+            'slug' => 'max:60|unique:categories,slug,'.$id.'|regex:/^[a-zA-Z0-9]+$/',
         ];
 
+        $parentId = $this->repository->checkParentId($input['parent_id']);
+        if ($parentId != 0) {
+            $code = config('validation')['category']['parent.error'];
+            $this->pushError($code);
+        }
+
         $this->requestValidate($input,$rules,'category');
+
+        $input['is_show'] = !empty($input['is_show']) && $input['is_show'] == 'on' ? 'yes' : 'no';
+
         $this->repository->update($input,$id);
         reminder()->success('分类修改成功','修改成功');
 

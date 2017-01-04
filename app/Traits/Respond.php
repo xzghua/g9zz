@@ -36,4 +36,8 @@ trait Respond
         throw new ValidatorException($code);
     }
 
+    public function indexPushError()
+    {
+        return abort(404);
+    }
 }

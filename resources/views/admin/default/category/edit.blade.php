@@ -56,6 +56,14 @@
                     <input type="text" value="{{$category->slug}}" name="slug" class="form-control m-b-8 input-sm " placeholder="请输入缩略名">
                 </div>
             </div>
+            <h3 class="block-title">IS_SHOW</h3>
+
+            <div class="row">
+                <div class="col-md-1">
+                    <label for="top">显示</label>
+                    <input type="checkbox" id="top" @if ($category->is_show == 'yes') checked @endif name="isShow" class="form-control m-b-8 " >
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-6">

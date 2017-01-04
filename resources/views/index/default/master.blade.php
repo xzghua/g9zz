@@ -68,9 +68,12 @@ ______                            _                   _ _ _ _ _
             </div>
             <div id="top-navbar-collapse" class="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class=""><a href="topics">社区</a></li>
-                    <li class=""><a href="categories/6?filter=recent">知乎</a></li>
-                    <li class=""><a href="categories/1">微博</a></li>
+                    @foreach(config('navigate') as $item)
+                        <li class=""><a href="{{$item['url']}}">{{$item['name']}}</a></li>
+                    @endforeach
+                    {{--<li class=""><a href="topics">社区</a></li>--}}
+                    {{--<li class=""><a href="categories/6?filter=recent">知乎</a></li>--}}
+                    {{--<li class=""><a href="categories/1">微博</a></li>--}}
 
                 </ul>
 

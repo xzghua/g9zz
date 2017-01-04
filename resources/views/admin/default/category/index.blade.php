@@ -24,7 +24,9 @@
                     <th>No.</th>
                     <th>分类名</th>
                     <th>缩略名</th>
+                    <th>IS_SHOW</th>
                     <th>描述</th>
+                    <th>地址</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -34,7 +36,9 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->html.$item->name}}</td>
                         <td>{{$item->slug}}</td>
+                        <td>{{$item->is_show == 'no' ? '否' : '是'}}</td>
                         <td>{{$item->description}}</td>
+                        <td>{{ url('post',$item->slug)}}</td>
                         <td>
                             <button class="btn-primary"><a href="/admin/category/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
                             <form action="/admin/category/{{$item->id}}" method="post">

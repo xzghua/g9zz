@@ -16,11 +16,13 @@ interface CategoryRepositoryInterface extends BaseRepositoryInterface
 
     public function getAllSortCate();
 
-    public function getPostListByCateName($cateName);
+    public function getPostListByCateSlug($cateSlug);
 
     public function getCateSlug($cateName);
 
     public function getTopCate();
 
     public function checkParentId($parentId);
+
+    public function checkSlugExists($cateSlug);
 }

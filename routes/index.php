@@ -10,4 +10,4 @@ Route::post('/post/{id}/vote','PostController@vote')->where('id','[0-9]+')->name
 
 Route::get('/','IndexController@index');
 //Route::get('/post','IndexController@postList');
-Route::get('/post/{cate_name}','IndexController@postList');
+Route::get('/list/{cate_slug}','IndexController@postList')->name('post.list');

@@ -27,6 +27,7 @@ return [
         'name.unique' =>  402000004,
         'slug.regex' =>  402000005,
         'parent.error' =>  402000006,
+        'parentEqualToSelf.error' =>  402000007,
     ],
 
     'reply' => [

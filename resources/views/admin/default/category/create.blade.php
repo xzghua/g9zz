@@ -46,6 +46,15 @@
                 </div>
             </div>
 
+            <h3 class="block-title">IS_SHOW</h3>
+
+            <div class="row">
+                <div class="col-md-1">
+                    <label for="top">显示</label>
+                    <input type="checkbox" id="top" name="isShow" class="form-control m-b-8 " >
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <h3 class="block-title">描述</h3>

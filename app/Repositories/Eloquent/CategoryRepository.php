@@ -43,12 +43,12 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
      * 通过分类名获取 该分类或者该分类下级的所有分类 集合
      *
      * @date 2017年01月03日16:41:19
-     * @param $cateName
+     * @param $cateSlug
      * @return array
      */
-    public function getPostListByCateName($cateName)
+    public function getPostListByCateSlug($cateSlug)
     {
-        $cate = $this->model->whereName($cateName)->first();
+        $cate = $this->model->whereSlug($cateSlug)->first();
 
         $cateList = [];
         if ($cate->parent_id == 0) {
@@ -91,5 +91,11 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     public function checkParentId($parentId)
     {
         return $this->model->whereId($parentId)->value('parent_id');
+    }
+
+
+    public function checkSlugExists($cateSlug)
+    {
+        return $this->model->whereSlug($cateSlug)->value('id');
     }
 }

@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 
-//use Illuminate\Support\Facades\Input;
 
 class PostController extends Controller
 {

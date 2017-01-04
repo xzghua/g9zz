@@ -6,6 +6,7 @@ use App\Exceptions\ValidatorException;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
 class Handler extends ExceptionHandler
@@ -52,8 +53,8 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ValidatorException) {
             $code = $exception->getCode();
             if ($code == 0) $code = 400000000;
-
-            return  response()->json(['message' => config('message.'.$code),'code' => $code]);
+            reminder()->error(config('message.'.$code),'there are some errors!!');
+            return  redirect()->back();
         }
 
 //        if ($exception instanceof Exception) {
@@ -61,6 +62,9 @@ class Handler extends ExceptionHandler
 //            return  response()->json(['message' => config('message.'.$code),'code' => $code]);
 //        }
 
+        if ($exception instanceof HttpException) {
+            return view('errors.404');
+        }
 
         return parent::render($request, $exception);
     }
