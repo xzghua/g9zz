@@ -11,3 +11,5 @@ Route::post('/post/{id}/vote','PostController@vote')->where('id','[0-9]+')->name
 Route::get('/','IndexController@index');
 //Route::get('/post','IndexController@postList');
 Route::get('/list/{cate_slug}','IndexController@postList')->name('post.list');
+Route::get('/detail/{id}','IndexController@postDetail')->where('id','[0-9]+')->name('post.detail');
+Route::post('/appends/{id}','IndexController@postAppend')->where('id','[0-9]+')->name('appends.store');

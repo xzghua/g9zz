@@ -25,4 +25,13 @@ class ReplyRepository extends BaseRepository implements ReplyRepositoryInterface
         // TODO: Implement getEditReply() method.
         return $this->model->whereId($id)->with(['post'])->with(['reply_user'])->first();
     }
+
+    public function getReply($postId)
+    {
+        return $this->model->wherePostId($postId)
+            ->with('post')
+            ->with('reply_user')
+            ->orderBy('created_at','asc')
+            ->paginate(per_page());
+    }
 }

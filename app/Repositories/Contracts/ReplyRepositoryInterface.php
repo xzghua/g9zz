@@ -12,4 +12,7 @@ namespace App\Repositories\Contracts;
 interface ReplyRepositoryInterface extends BaseRepositoryInterface
 {
     public function getEditReply($id);
+
+    public function getReply($postId);
+
 }

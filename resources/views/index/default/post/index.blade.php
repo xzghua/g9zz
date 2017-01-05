@@ -83,7 +83,7 @@
 
                                     <span class="hidden-xs label label-default">{{$item->category->name}}</span>
 
-                                    <a href="{{$item->id}}" title="{{$item->title}}">
+                                    <a href= "{{route('post.detail', [$item->id])}}" title="{{$item->title}}">
                                         {{$item->title}}
                                     </a>
                                 </div>

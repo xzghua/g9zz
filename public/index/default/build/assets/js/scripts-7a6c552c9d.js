@@ -5802,6 +5802,7 @@ var QRCode;!function(){function t(t){this.mode=l.MODE_8BIT_BYTE,this.data=t,this
                             topic_id: $('[name=topic_id]').val()
                         },
                     }).done(function(data) {
+                        console.log(data.status);
                         if (data.status === 200) {
                             if (data.manage_topics === 'yes') {
                                 delTpl = '<a class="" id="reply-delete-' + data.reply.id + '" data-ajax="delete" href="javascript:void(0);" data-url="/replies/delete/' + data.reply.id + '" title="删除"><i class="fa fa-trash-o"></i></a><span> •  </span>';

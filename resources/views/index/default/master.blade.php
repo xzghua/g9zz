@@ -27,6 +27,7 @@ ______                            _                   _ _ _ _ _
     <meta name="keywords" content="" />
     <meta name="author" content="g9zz" />
     <meta name="description" content="  " />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="/index/default/build/assets/css/styles-a6f44dd75d.css">
 

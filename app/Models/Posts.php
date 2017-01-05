@@ -86,5 +86,14 @@ class Posts extends Model
         return $this->hasOne(Users::class,'id','last_reply_user_id');
     }
 
+    public function reply()
+    {
+        return $this->hasMany(Replies::class,'post_id','id');
+    }
 
+
+    public function postscript()
+    {
+        return $this->hasMany(Appends::class,'id','post_id');
+    }
 }

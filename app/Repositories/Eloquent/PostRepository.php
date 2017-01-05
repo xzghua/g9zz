@@ -29,4 +29,17 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         return $this->model->whereIn('category_id',$cateList);
     }
+
+    public function getPostDetail($postId)
+    {
+        return $this->model->whereId($postId)
+            ->with('category')
+            ->with('author')
+            ->with('last_reply_user')
+            ->with('reply')
+            ->with('postscript')
+            ->first();
+    }
+
+
 }

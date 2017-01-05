@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Index;
 use App\Repositories\Eloquent\CategoryRepository;
 use App\Http\Controllers\Controller;
 use App\Repositories\Eloquent\PostRepository;
+use App\Repositories\Eloquent\ReplyRepository;
 
 class IndexController extends Controller
 {
@@ -12,10 +13,13 @@ class IndexController extends Controller
 
     public $postRepository;
 
-    public function __construct(CategoryRepository $categoryRepository,PostRepository $postRepository)
+    public $replyRepository;
+
+    public function __construct(CategoryRepository $categoryRepository,PostRepository $postRepository,ReplyRepository $replyRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->postRepository = $postRepository;
+        $this->replyRepository = $replyRepository;
     }
 
     public function index()
@@ -57,6 +61,33 @@ class IndexController extends Controller
             ->with('last_reply_user')
             ->paginate(per_page());
         return view('index.'.set_index_theme().'.post.index',compact('postList','cateShow'));
+    }
+
+    /**
+     * 帖子详情
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function postDetail($id)
+    {
+        $this->postRepository->find($id);
+
+        $detail = $this->postRepository->getPostDetail($id);
+        $replies = $this->replyRepository->getReply($id);
+//        dd($detail->toArray(),$replies->toArray());
+        return view('index.'.set_index_theme().'.post.detail',compact('detail','replies'));
+    }
+
+
+    public function postAppend($id)
+    {
+        $this->postRepository->find($id);
+        return response([
+            'status'  => 200,
+            'message' => 222,
+            'append'  => 2222
+        ]);
     }
 
 }
