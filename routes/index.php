@@ -13,3 +13,5 @@ Route::get('/','IndexController@index');
 Route::get('/list/{cate_slug}','IndexController@postList')->name('post.list');
 Route::get('/detail/{id}','IndexController@postDetail')->where('id','[0-9]+')->name('post.detail');
 Route::post('/appends/{id}','IndexController@postAppend')->where('id','[0-9]+')->name('appends.store');
+
+Route::post('reply','IndexController@postReply')->name('post.reply');

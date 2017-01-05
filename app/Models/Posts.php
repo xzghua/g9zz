@@ -53,6 +53,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Users $author
  * @property-read \App\Models\Users $last_reply_user
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Posts whereIsTop($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Replies[] $reply
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Appends[] $postscript
  */
 class Posts extends Model
 {
@@ -94,6 +96,6 @@ class Posts extends Model
 
     public function postscript()
     {
-        return $this->hasMany(Appends::class,'id','post_id');
+        return $this->hasMany(Appends::class,'topic_id','id');
     }
 }

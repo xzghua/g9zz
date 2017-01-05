@@ -5799,7 +5799,7 @@ var QRCode;!function(){function t(t){this.mode=l.MODE_8BIT_BYTE,this.data=t,this
                         url: $(this).attr('action'),
                         data: {
                             body: commentText,
-                            topic_id: $('[name=topic_id]').val()
+                            postId: $('[name=postId]').val()
                         },
                     }).done(function(data) {
                         console.log(data.status);

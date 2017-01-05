@@ -66,14 +66,6 @@
                     @endforeach
                 @endif
 
-                <div class="appends">
-                    <span class="meta">附言 1 &nbsp;·&nbsp; <abbr title="2017-01-04 21:51:36" class="timeago">2017-01-04 21:51:36</abbr></span>
-                    <div class="sep5"></div>
-                    <div class="markdown-reply append-content">
-                        <p>撒旦法</p>
-                    </div>
-                </div>
-
             </div>
 
             <div class="panel-footer operate">
@@ -101,7 +93,7 @@
                         <i class="fa fa-trash-o"></i>
                     </a>
 
-                    <a id="topic-append-button" href="javascript:void(0);" class="admin  popover-with-html" data-toggle="modal" data-target="#exampleModal" data-content="帖子附言，添加附言后所有参与讨论的用户都能收到消息提醒，包括点赞和评论的用户">
+                    <a id="topic-append-button" href="javascript:void(0);" class="admin  popover-with-html" data-toggle="modal" data-target="#exampleModal" data-content="帖子附言234">
                         <i class="fa fa-plus"></i>
                     </a>
 
@@ -114,40 +106,6 @@
             </div>
 
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="" aria-labelledby="exampleModalLabel" >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="exampleModalLabel">添加附言</h4>
-                        </div>
-
-                        <form  action="/appends/{{$detail->id}}" accept-charset="UTF-8" id="reply-form">
-                            {!! csrf_field() !!}
-
-                            <div class="modal-body">
-                                {{ csrf_field() }}
-
-                                <div class="alert alert-warning">
-                                    附加内容
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" rows="5" placeholder="请使用 Markdown 格式书写 ;-)" style="overflow:hidden" id="reply_content" name="body" cols="50"></textarea>
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                <button type="submit" class="btn btn-primary">提交</button>
-                            </div>
-
-                        </form>
-
-                    </div>
-                </div>
-            </div>
         </div>
 
 
@@ -196,9 +154,10 @@
 
             <div class="panel-body">
 
+                @if (!empty($replies))
                 <ul class="list-group row">
-                    @if (!empty($replies))
-                        @foreach($replies as $item)
+
+                    @foreach($replies as $key =>  $item)
 
                             <li class="list-group-item media" style="margin-top: 0px;">
 
@@ -227,11 +186,11 @@
                                         </span>
 
                                         <div class="meta">
-                                            <a name="reply1" class="anchor" href="170#reply1" aria-hidden="true">#1</a>
+                                            <a name="reply1" class="anchor" href="" aria-hidden="true"># {{$key+1}}</a>
 
 
                                             <span> ⋅  </span>
-                                            <abbr class="timeago" title="2016-12-03 21:55:12">{{$item->created_at}}</abbr>
+                                            <abbr class="timeago" title="{{$item->created_at}}">{{$item->created_at}}</abbr>
 
                                         </div>
 
@@ -244,30 +203,34 @@
                                 </div>
 
                             </li>
-                        @endforeach
-                    @endif
+                    @endforeach
 
                 </ul>
-                <div id="replies-empty-block" class="empty-block hide">暂无评论~~</div>
 
+
+                @else
+
+                    <ul class="list-group row"></ul>
+                    <div id="replies-empty-block" class="empty-block">咱无评论~~</div>
+                @endif
                 <!-- Pager -->
                 <div class="pull-right" style="padding-right:20px">
 
                 </div>
+
             </div>
+
         </div>
 
         <!-- Reply Box -->
         <div class="reply-box form box-block">
 
-            <form method="POST" action="http://www.g9zz.com/replies" accept-charset="UTF-8" id="reply-form">
-                <input type="hidden" name="_token" value="PlrajfakyffLlTHKHGNT152tItEmwx2A1OddcoZn">
-                <input type="hidden" name="topic_id" value="170" />
+            <form method="POST" action="/reply" accept-charset="UTF-8" id="reply-form">
+                {!! csrf_field() !!}
+                <input type="hidden" name="postId" value="{{$detail->id}}" />
 
                 <div id="reply_notice" class="box">
                     <ul class="helpblock list">
-                        <li>此处可以放点广告</li>
-                        <li>此处可以放点广告</li>
                         <li>此处可以放点广告</li>
                         <li>此处可以放点广告</li>
                     </ul>
@@ -278,7 +241,7 @@
                 </div>
 
                 <div class="form-group reply-post-submit">
-                    <input class="btn btn-primary disabled" id="reply-create-submit" type="submit" value="回复">
+                    <input class="btn btn-primary " id="reply-create-submit" type="submit" value="回复">
                     <span class="help-inline" title="Or Command + Enter">Ctrl+Enter</span>
                 </div>
 
@@ -296,13 +259,13 @@
 
 
 
-            <div class="panel panel-default corner-radius">
-                <div class="panel-heading text-center">
-                    <h3 class="panel-title">叶落山城 的其他话题</h3>
-                </div>
-                <div class="panel-body">
-                </div>
-            </div>
+            {{--<div class="panel panel-default corner-radius">--}}
+                {{--<div class="panel-heading text-center">--}}
+                    {{--<h3 class="panel-title">叶落山城 的其他话题</h3>--}}
+                {{--</div>--}}
+                {{--<div class="panel-body">--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
 
             <div class="panel panel-default corner-radius">
@@ -316,10 +279,10 @@
 
 
 
-            <div class="panel panel-default corner-radius">
-                <div class="panel-body text-center sidebar-sponsor-box">
-                </div>
-            </div>
+            {{--<div class="panel panel-default corner-radius">--}}
+                {{--<div class="panel-body text-center sidebar-sponsor-box">--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
 
 
@@ -337,9 +300,9 @@
 
 
             <div class="box text-center">
-                <p style="margin-bottom: 10px;margin-top: 10px;">哎哟,这里放啥呢</p>
+                <p style="margin-bottom: 10px;margin-top: 10px;">看呀,那边有个sb</p>
                 <img class="image-border popover-with-html" data-content=""
-                     src="#" style="width:80%">
+                     src="http://dl.bizhi.sogou.com/images/2012/03/22/49350.jpg" style="width:80%">
                 <br/><br/>
             </div>
 
@@ -375,11 +338,11 @@
                 <div class="modal-body">
 
                     <div class="alert alert-warning">
-                        附加内容, 使用此功能的话, 会给所有参加过讨论的人发送提醒.
+                        附加内容
                     </div>
-
+                    <input type="hidden" name="topic_id" value="{{$detail->id}}">
                     <div class="form-group">
-                        <textarea class="form-control" style="min-height:20px" placeholder="请使用markdown语法 " name="content" cols="50" rows="10"></textarea>
+                        <textarea class="form-control" style="min-height:20px" placeholder="请使用markdown语法 " name="content1" cols="50" rows="10"></textarea>
                     </div>
 
                 </div>

@@ -36,4 +36,8 @@ return [
         'post_id.required' => 403000001,
         'post_id.exists' => 403000002,
     ],
+
+    'append' => [
+        'content.required' => 405000000,
+    ],
 ];
