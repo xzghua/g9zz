@@ -12,5 +12,3 @@ Route::get('/','IndexController@index');
 //Route::get('/post','IndexController@postList');
 Route::get('/list/{cate_slug}','IndexController@postList')->name('post.list');
 
-Route::get('auth/{service}', 'Auth\MyLoginController@redirectToProvider');
-Route::get('auth/{service}/callback', 'Auth\MyLoginController@handleProviderCallback');

@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/auth/login', 'Auth\MyLoginController@showLoginForm');
+
+Route::get('auth/{service}', 'Auth\MyLoginController@redirectToProvider');
+Route::get('auth/{service}/callback', 'Auth\MyLoginController@handleProviderCallback');
