@@ -38,29 +38,4 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    /**
-     * 将用户重定向到Github认证页面
-     * @param $service
-     * @return Response
-     */
-    public function redirectToProvider($service)
-    {
-        return Socialite::driver($service)->redirect();
-    }
-
-    /**
-     * 从Github获取用户信息.
-     * @param $service
-     * @return Response
-     */
-    public function handleProviderCallback($service)
-    {
-        $user = Socialite::driver($service)->stateless()->user();
-        dd($user);
-        // $user->token;
-    }
-
-
-
-
 }
