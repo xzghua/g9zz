@@ -62,9 +62,9 @@ class Handler extends ExceptionHandler
 //            return  response()->json(['message' => config('message.'.$code),'code' => $code]);
 //        }
 
-        if ($exception instanceof HttpException) {
-            return view('errors.404');
-        }
+//        if ($exception instanceof HttpException) {
+//            return view('errors.404');
+//        }
 
         return parent::render($request, $exception);
     }
