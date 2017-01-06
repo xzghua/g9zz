@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/index';
 
     /**
      * Create a new controller instance.
@@ -36,4 +37,30 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
+    /**
+     * 将用户重定向到Github认证页面
+     * @param $service
+     * @return Response
+     */
+    public function redirectToProvider($service)
+    {
+        return Socialite::driver($service)->redirect();
+    }
+
+    /**
+     * 从Github获取用户信息.
+     * @param $service
+     * @return Response
+     */
+    public function handleProviderCallback($service)
+    {
+        $user = Socialite::driver($service)->stateless()->user();
+        dd($user);
+        // $user->token;
+    }
+
+
+
+
 }

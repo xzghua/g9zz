@@ -173,6 +173,11 @@ return [
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         //提示
         Rry\Reminder\ReminderServiceProvider::class,
+        //社会化登陆组件
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        //微博 qq 微信等登陆组件
+        SocialiteProviders\Manager\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -232,6 +237,7 @@ return [
 
         'Clockwork' => Clockwork\Support\Laravel\Facade::class,
         'Reminder'  => Rry\Reminder\ReminderFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

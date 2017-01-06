@@ -24,9 +24,9 @@
   - Github:[https://github.com/bosnadev/repository](https://github.com/bosnadev/repository)
   - 中文:[http://laravelacademy.org/post/3063.html](http://laravelacademy.org/post/3063.html)
 
-- 
-  - Github:[]()
-  - 中文:[]()
+- Socialite Providers
+  - Github:[https://github.com/SocialiteProviders](https://github.com/SocialiteProviders)
+  - 中文:[http://laravelacademy.org/post/1321.html](http://laravelacademy.org/post/1321.html)
 
 - 
   - Github:[]()

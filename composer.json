@@ -11,7 +11,10 @@
         "doctrine/dbal": "^2.5",
         "itsgoingd/clockwork": "~1.11.1",
         "bosnadev/repositories": " 0.*",
-        "rry/reminder": "^1.0"
+        "rry/reminder": "^1.0",
+        "laravel/socialite": "^2.0",
+        "socialiteproviders/weibo": "^2.0",
+        "socialiteproviders/weixin": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
