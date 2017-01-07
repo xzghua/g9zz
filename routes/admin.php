@@ -6,7 +6,7 @@
  * Time: 下午2:14
  */
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web','auth']], function () {
 
     Route::resource('index','BackendController');
 
