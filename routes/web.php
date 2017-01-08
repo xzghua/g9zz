@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('auth/{service}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{service}/callback', 'Auth\LoginController@handleProviderCallback');

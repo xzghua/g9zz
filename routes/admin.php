@@ -8,7 +8,9 @@
 
 Route::group(['middleware' => ['web','auth']], function () {
 
-    Route::resource('index','BackendController');
+//    Route::resource('index','BackendController');
+    Route::get('index','BackendController@index')->name('admin.index');
+    Route::get('profile','BackendController@showProfile')->name('admin.profile');
 
     //Post
     Route::get('post','PostController@index')->name('post.index');
