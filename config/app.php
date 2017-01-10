@@ -175,6 +175,8 @@ return [
         Rry\Reminder\ReminderServiceProvider::class,
         //社会化登陆组件
         Laravel\Socialite\SocialiteServiceProvider::class,
+        //二维码生成
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -235,6 +237,7 @@ return [
         'Clockwork' => Clockwork\Support\Laravel\Facade::class,
         'Reminder'  => Rry\Reminder\ReminderFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
     ],
 
 ];
