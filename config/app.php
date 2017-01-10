@@ -175,6 +175,8 @@ return [
         Rry\Reminder\ReminderServiceProvider::class,
         //社会化登陆组件
         Laravel\Socialite\SocialiteServiceProvider::class,
+        //社会登陆组件2 微博 微信等等
+        SocialiteProviders\Manager\ServiceProvider::class,
         //二维码生成
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
