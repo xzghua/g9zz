@@ -52,15 +52,11 @@ if (!function_exists('set_theme')) {
  * @date 2017年01月02日15:00:54
  */
 if (!function_exists('set_index_theme')) {
-    function set_index_theme($theme = 'default')
+    function set_index_theme($theme = 'g9zz')
     {
         return $theme;
     }
 }
-
-
-
-
 
 
 

@@ -83,7 +83,7 @@ class IndexController extends Controller
 
         $detail = $this->postRepository->getPostDetail($id);
         $replies = $this->replyRepository->getReply($id);
-//        dd($detail->toArray(),$replies);
+//        dd($detail->toArray(),$replies->toArray());
         return view('index.'.set_index_theme().'.post.detail',compact('detail','replies'));
     }
 
