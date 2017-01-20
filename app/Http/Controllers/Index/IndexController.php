@@ -67,7 +67,7 @@ class IndexController extends Controller
             ->with('category')
             ->with('author')
             ->with('last_reply_user')
-            ->paginate(per_page());
+            ->paginate(per_page(3));
         return view('index.'.set_index_theme().'.post.index',compact('postList','cateShow'));
     }
 
