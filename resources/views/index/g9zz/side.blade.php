@@ -16,7 +16,9 @@
 
     <div class="right_content">
         <div class="index_left_head">
-            <button type="button" class="btn btn-success">发布话题</button>
+            <a href="{{route('index.post.create')}}">
+                <button type="button" class="btn btn-success" >发布话题</button>
+            </a>
         </div>
     </div>
     {{--<div class="right_content">--}}

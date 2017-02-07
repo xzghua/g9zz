@@ -44,7 +44,6 @@ class ReplyController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
     public function store(Request $request)
@@ -73,7 +72,7 @@ class ReplyController extends Controller
 
         try {
             \DB::beginTransaction();
-            $this->repository->create($input);
+            $result = $this->repository->create($input);
 
             $update['last_reply_user_id'] = $input['user_id'];
             $update['reply_count'] = $reply_count + 1;
@@ -89,7 +88,12 @@ class ReplyController extends Controller
             throw new \Exception($code);
         }
 
-        return redirect()->back();
+        if ($request->ajax()) {
+            $this->setData($result);
+            return $this->response();
+        } else {
+            return redirect()->back();
+        }
 
     }
 

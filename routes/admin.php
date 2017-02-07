@@ -6,7 +6,8 @@
  * Time: 下午2:14
  */
 
-Route::group(['middleware' => ['web','auth']], function () {
+//Route::group(['middleware' => ['web','auth']], function () { //需要登陆
+Route::group(['middleware' => ['web']], function () {
 
 //    Route::resource('index','BackendController');
     Route::get('index','BackendController@index')->name('admin.index');

@@ -36,7 +36,7 @@
         <div class="header_info">
             <ul>
                 <li><a href="">0</a> </li>
-                <li><a href=""><img src="/index/g9zz/images/avat.jpg">琴歌</a></li>
+                <li><a href="#" class="userHref"><img src="/index/g9zz/images/avat.jpg" class="userImg"><span class="userName">琴歌</span></a></li>
                 <li></li>
             </ul>
         </div>

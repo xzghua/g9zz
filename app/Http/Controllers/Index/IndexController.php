@@ -83,11 +83,16 @@ class IndexController extends Controller
 
         $detail = $this->postRepository->getPostDetail($id);
         $replies = $this->replyRepository->getReply($id);
-//        dd($detail->toArray(),$replies->toArray());
-        return view('index.'.set_index_theme().'.post.detail',compact('detail','replies'));
+        $appends = $this->appendRepository->getAppendByPostId($id);
+//        dd($detail->toArray(),$replies->toArray(),$appends->toArray());
+        return view('index.'.set_index_theme().'.post.detail',compact('detail','replies','appends'));
     }
 
-
+    /**
+     * 添加附言
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function postAppend($id)
     {
         $this->postRepository->find($id);
@@ -113,7 +118,14 @@ class IndexController extends Controller
         ]);
     }
 
-
+    /**
+     *
+     * 添加回复
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function postReply(Request $request)
     {
 
@@ -167,6 +179,12 @@ class IndexController extends Controller
             'reply'         => $reply,
             'manage_topics' => 'yes',
         ]);
+    }
+
+
+    public function getPostCreate()
+    {
+        return view('index.'.set_index_theme().'.post.create');
     }
 
 

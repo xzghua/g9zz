@@ -56,7 +56,7 @@
                                         <li class="row list-group-item">
                                             <div class="col-md-9">
                                                 <img src="{{!empty($item->author->avatar) ? $item->author->avatar : 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2720246094,3678904868&fm=21&gp=0.jpg'}}" alt="{{$item->author->name}}" />
-                                                <a href="{{route('post.detail', [$item->id])}}">
+                                                <a href="{{route('index.post.detail', [$item->id])}}">
                                                 <span class="label label-success">{{$item->category->name}}</span>{{$item->title}}
                                                 </a>
                                             </div>
