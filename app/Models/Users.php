@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\Models\Users
@@ -87,7 +88,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Users whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Users whereUpdatedAt($value)
  */
-class Users extends Model
+class Users extends Authenticatable
 {
     //
     protected $table = 'users';

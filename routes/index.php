@@ -10,8 +10,21 @@ Route::post('/post/{id}/vote','PostController@vote')->where('id','[0-9]+')->name
 
 Route::get('/','IndexController@index');
 //Route::get('/post','IndexController@postList');
-Route::get('/list/{cate_slug}','IndexController@postList')->name('post.list');
-Route::get('/detail/{id}','IndexController@postDetail')->where('id','[0-9]+')->name('post.detail');
-Route::post('/appends/{id}','IndexController@postAppend')->where('id','[0-9]+')->name('appends.store');
+Route::get('/list/{cate_slug}','IndexController@postList')->name('index.post.list');
+//帖子详情页
+Route::get('/detail/{id}','IndexController@postDetail')->where('id','[0-9]+')->name('index.post.detail');
+//创建帖子页
+Route::get('/post/create','IndexController@getPostCreate')->name('index.post.create');
+//创建帖子
+Route::post('post','PostController@store')->name('index.post.store');
 
-Route::post('reply','IndexController@postReply')->name('post.reply');
+//提交附言
+Route::post('/appends/{id}','IndexController@postAppend')->where('id','[0-9]+')->name('index.appends.store');
+
+//提交回复
+Route::post('reply','IndexController@postReply')->name('index.post.reply');
+
+Route::get('/me/center','MeCenterController@index')->name('index.me.center');
+
+
+

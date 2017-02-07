@@ -87,7 +87,7 @@ ______                            _                   _ _ _ _ _
 
                     <ul class="nav navbar-nav github-login" >
 
-                        <a href="auth/oauth?driver=github" class="btn btn-info login-btn">
+                        <a href="/login" class="btn btn-info login-btn">
                             <i class="fa fa-github-alt"></i>
                             登 录
                         </a>

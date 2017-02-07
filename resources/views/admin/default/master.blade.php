@@ -25,7 +25,7 @@
 
 <header id="header" class="media">
     <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="index.html">G9ZZ 1.0</a>
+    <a class="logo pull-left" href="/" target="_blank">G9ZZ 1.0</a>
 
     <div class="media-body">
         <div class="media" id="top-menu">
@@ -73,16 +73,24 @@
             <!-- Profile Menu -->
             <div class="text-center s-widget m-b-25 dropdown" id="profile-menu">
                 <a href="" data-toggle="dropdown">
-                    <img class="profile-pic animated" src="/admin/default/img/profile-pic.jpg" alt="">
+                    <img class="profile-pic animated" src="{{Auth::user()->avatar ? Auth::user()->avatar : '/admin/default/img/profile-pic.jpg'}}  " alt="">
                 </a>
                 <ul class="dropdown-menu profile-menu">
-                    <li><a href="">My Profile</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
-                    <li><a href="">Messages</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
-                    <li><a href="">Settings</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
-                    <li><a href="">Sign Out</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
+                    <li><a href="/admin/profile">My Profile</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
+                    {{--<li><a href="">Messages</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>--}}
+                    {{--<li><a href="">Settings</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>--}}
+                    <li><a href="{{ url('/logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
                 </ul>
-                <h4 class="m-0">Malinda Hollaway</h4>
-                @malinda-h
+                <h4 class="m-0">{{Auth::user()->name}}</h4>
+                {{--@malinda-h--}}
             </div>
 
             <!-- Calendar -->

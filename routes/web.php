@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/test', 'Index\IndexController@test');
+
+Route::get('auth/{service}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{service}/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('getQrcode', 'Auth\LoginController@getQrcode');

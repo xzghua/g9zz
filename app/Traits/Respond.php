@@ -12,7 +12,9 @@ use App\Exceptions\ValidatorException;
 
 trait Respond
 {
-    public $code;
+    public $code = 200;
+
+    public $data;
 
     public function setCode($code)
     {
@@ -39,5 +41,16 @@ trait Respond
     public function indexPushError()
     {
         return abort(404);
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+
+    public function response()
+    {
+        return \Response::json(['data' => $this->data,'code' => $this->code]);
     }
 }

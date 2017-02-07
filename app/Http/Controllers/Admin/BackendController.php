@@ -15,9 +15,15 @@ class BackendController extends Controller
      */
     public function index()
     {
-        //
         return view('admin.'.set_theme().'.index');
     }
+
+    public function showProfile()
+    {
+        return view('admin.'.set_theme().'.profile');
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

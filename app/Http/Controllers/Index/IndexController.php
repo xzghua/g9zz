@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Index;
 
 use App\Mail\SendMail;
+use App\Models\Posts;
 use App\Repositories\Eloquent\AppendRepository;
 use App\Repositories\Eloquent\CategoryRepository;
 use App\Http\Controllers\Controller;
@@ -43,20 +44,28 @@ class IndexController extends Controller
      */
     public function postList($cate_slug)
     {
-        $slugId  = $this->categoryRepository->checkSlugExists($cate_slug);
-
-        if (empty($slugId)) $this->indexPushError();
-
         $request = \Request::only(['filter','cate']);
         \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $request]);
 
-        if (!empty($request['cate'])) {
-            $cate_slug = $request['cate'];
+        //如果展示全部帖子
+        if ($cate_slug == 'all') {
+            $postList = $this->postRepository->models();
+            $cateShow = [];
+
+        } else {
+            $slugId  = $this->categoryRepository->checkSlugExists($cate_slug);
+
+            if (empty($slugId)) $this->indexPushError();
+
+            if (!empty($request['cate'])) {
+                $cate_slug = $request['cate'];
+            }
+
+            $cateShow = $this->categoryRepository->getAllIsShowCateByCateSlug($cate_slug);//该分类或者该父分类下所有的is_show列表
+            $cateList = $this->categoryRepository->getPostListByCateSlug($cate_slug);
+            $postList = $this->postRepository->getPostListByCateList($cateList);
         }
 
-        $cateShow = $this->categoryRepository->getAllIsShowCateByCateSlug($cate_slug);//该分类或者该父分类下所有的is_show列表
-        $cateList = $this->categoryRepository->getPostListByCateSlug($cate_slug);
-        $postList = $this->postRepository->getPostListByCateList($cateList);
 
         if ($request['filter'] == 'excellent') {
             $postList = $postList->where('is_excellent','yes');
@@ -64,11 +73,14 @@ class IndexController extends Controller
 
         $postList = $postList
             ->orderBy('is_top','asc')
+            ->orderBy('created_at','desc')
             ->with('category')
             ->with('author')
             ->with('last_reply_user')
-            ->paginate(per_page());
-        return view('index.'.set_index_theme().'.post.index',compact('postList','cateShow'));
+            ->paginate(per_page(5));
+        parse_str(parse_url(url()->full(),PHP_URL_QUERY),$link);
+
+        return view('index.'.set_index_theme().'.post.index',compact('postList','cateShow','link'));
     }
 
     /**
@@ -83,11 +95,16 @@ class IndexController extends Controller
 
         $detail = $this->postRepository->getPostDetail($id);
         $replies = $this->replyRepository->getReply($id);
-//        dd($detail->toArray(),$replies);
-        return view('index.'.set_index_theme().'.post.detail',compact('detail','replies'));
+        $appends = $this->appendRepository->getAppendByPostId($id);
+//        dd($detail->toArray(),$replies->toArray(),$appends->toArray());
+        return view('index.'.set_index_theme().'.post.detail',compact('detail','replies','appends'));
     }
 
-
+    /**
+     * 添加附言
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function postAppend($id)
     {
         $this->postRepository->find($id);
@@ -113,7 +130,14 @@ class IndexController extends Controller
         ]);
     }
 
-
+    /**
+     *
+     * 添加回复
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function postReply(Request $request)
     {
 
@@ -167,6 +191,19 @@ class IndexController extends Controller
             'reply'         => $reply,
             'manage_topics' => 'yes',
         ]);
+    }
+
+
+    public function getPostCreate()
+    {
+        $categories = $this->categoryRepository->getCate();
+        return view('index.'.set_index_theme().'.post.create',compact('categories'));
+    }
+
+
+    public function test()
+    {
+        return view('welcome');
     }
 
 }
