@@ -69,7 +69,7 @@ class RouteServiceProvider extends ServiceProvider
     public function mapIndexRoutes()
     {
         Route::group([
-//            'middleware' => 'api',
+            'middleware' => 'web',
             'namespace' => $this->namespace . '\Index',
 //            'prefix' => 'admin',
         ], function ($router) {

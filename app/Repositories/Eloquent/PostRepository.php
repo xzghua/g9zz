@@ -15,13 +15,34 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     public function model()
     {
-        // TODO: Implement model() method.
         return Posts::class;
+    }
+
+    public function models()
+    {
+        return $this->model;
     }
 
     public function getAll()
     {
-        // TODO: Implement getAll() method.
         return 1111;
     }
+
+    public function getPostListByCateList($cateList)
+    {
+        return $this->model->whereIn('category_id',$cateList);
+    }
+
+    public function getPostDetail($postId)
+    {
+        return $this->model->whereId($postId)
+            ->with('category')
+            ->with('author')
+            ->with('last_reply_user')
+            ->with('reply')
+            ->with('postscript')
+            ->first();
+    }
+
+
 }

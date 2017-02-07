@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.3.28 on 2016-12-30.
+ * Generated for Laravel 5.3.28 on 2017-01-10.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12111,6 +12111,285 @@ namespace {
          */
         public static function endEvent($name){
             return \Clockwork\Clockwork::endEvent($name);
+        }
+        
+    }
+
+
+    class Reminder extends \Rry\Reminder\ReminderFacade{
+        
+        /**
+         * build the script tag.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function message(){
+            return \Rry\Reminder\Reminder::message();
+        }
+        
+        /**
+         * Add a flash message to session.
+         *
+         * @param string $type Must be one of info, success, warning, error.
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */
+        public static function add($type, $message, $title = null, $options = array()){
+            \Rry\Reminder\Reminder::add($type, $message, $title, $options);
+        }
+        
+        /**
+         * Add an info flash message to session.
+         *
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */
+        public static function info($message, $title = null, $options = array()){
+            \Rry\Reminder\Reminder::info($message, $title, $options);
+        }
+        
+        /**
+         * Add a success flash message to session.
+         *
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */
+        public static function success($message, $title = null, $options = array()){
+            \Rry\Reminder\Reminder::success($message, $title, $options);
+        }
+        
+        /**
+         * Add an warning flash message to session.
+         *
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */
+        public static function warning($message, $title = null, $options = array()){
+            \Rry\Reminder\Reminder::warning($message, $title, $options);
+        }
+        
+        /**
+         * Add an error flash message to session.
+         *
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */
+        public static function error($message, $title = null, $options = array()){
+            \Rry\Reminder\Reminder::error($message, $title, $options);
+        }
+        
+    }
+
+
+    class Socialite extends \Laravel\Socialite\Facades\Socialite{
+        
+        /**
+         * Get a driver instance.
+         *
+         * @param string $driver
+         * @return mixed 
+         * @static 
+         */
+        public static function with($driver){
+            return \Laravel\Socialite\SocialiteManager::with($driver);
+        }
+        
+        /**
+         * Build an OAuth 2 provider instance.
+         *
+         * @param string $provider
+         * @param array $config
+         * @return \Laravel\Socialite\Two\AbstractProvider 
+         * @static 
+         */
+        public static function buildProvider($provider, $config){
+            return \Laravel\Socialite\SocialiteManager::buildProvider($provider, $config);
+        }
+        
+        /**
+         * Format the server configuration.
+         *
+         * @param array $config
+         * @return array 
+         * @static 
+         */
+        public static function formatConfig($config){
+            return \Laravel\Socialite\SocialiteManager::formatConfig($config);
+        }
+        
+        /**
+         * Get the default driver name.
+         *
+         * @throws \InvalidArgumentException
+         * @return string 
+         * @static 
+         */
+        public static function getDefaultDriver(){
+            return \Laravel\Socialite\SocialiteManager::getDefaultDriver();
+        }
+        
+        /**
+         * Get a driver instance.
+         *
+         * @param string $driver
+         * @return mixed 
+         * @static 
+         */
+        public static function driver($driver = null){
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Laravel\Socialite\SocialiteManager::driver($driver);
+        }
+        
+        /**
+         * Register a custom driver creator Closure.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return $this 
+         * @static 
+         */
+        public static function extend($driver, $callback){
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Laravel\Socialite\SocialiteManager::extend($driver, $callback);
+        }
+        
+        /**
+         * Get all of the created "drivers".
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getDrivers(){
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Laravel\Socialite\SocialiteManager::getDrivers();
+        }
+        
+    }
+
+
+    class QrCode extends \SimpleSoftwareIO\QrCode\Facades\QrCode{
+        
+        /**
+         * Generates a QrCode
+         *
+         * @param string $text The text to be converted into a QrCode
+         * @param null|string $filename The filename and path to save the QrCode file
+         * @return string|void Returns a QrCode string depending on the format, or saves to a file.
+         * @static 
+         */
+        public static function generate($text, $filename = null){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::generate($text, $filename);
+        }
+        
+        /**
+         * Merges an image with the center of the QrCode
+         *
+         * @param $image string The filepath to an image
+         * @param $percentage float The amount that the merged image should be placed over the qrcode.
+         * @param $absolute Whether to use an absolute filepath or not
+         * @return $this 
+         * @static 
+         */
+        public static function merge($filepath, $percentage = '0.2', $absolute = false){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::merge($filepath, $percentage, $absolute);
+        }
+        
+        /**
+         * Switches the format of the outputted QrCode or defaults to SVG
+         *
+         * @param string $format The desired format.
+         * @return $this 
+         * @throws \InvalidArgumentException
+         * @static 
+         */
+        public static function format($format){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::format($format);
+        }
+        
+        /**
+         * Changes the size of the QrCode
+         *
+         * @param int $pixels The size of the QrCode in pixels
+         * @return $this 
+         * @static 
+         */
+        public static function size($pixels){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::size($pixels);
+        }
+        
+        /**
+         * Changes the foreground color of a QrCode
+         *
+         * @param int $red
+         * @param int $green
+         * @param int $blue
+         * @return $this 
+         * @static 
+         */
+        public static function color($red, $green, $blue){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::color($red, $green, $blue);
+        }
+        
+        /**
+         * Changes the background color of a QrCode
+         *
+         * @param int $red
+         * @param int $green
+         * @param int $blue
+         * @return $this 
+         * @static 
+         */
+        public static function backgroundColor($red, $green, $blue){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::backgroundColor($red, $green, $blue);
+        }
+        
+        /**
+         * Changes the error correction level of a QrCode
+         *
+         * @param string $level Desired error correction level.  L = 7% M = 15% Q = 25% H = 30%
+         * @return $this 
+         * @static 
+         */
+        public static function errorCorrection($level){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::errorCorrection($level);
+        }
+        
+        /**
+         * Creates a margin around the QrCode
+         *
+         * @param int $margin The desired margin in pixels around the QrCode
+         * @return $this 
+         * @static 
+         */
+        public static function margin($margin){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::margin($margin);
+        }
+        
+        /**
+         * Sets the Encoding mode.
+         *
+         * @param string $encoding
+         * @return $this 
+         * @static 
+         */
+        public static function encoding($encoding){
+            return \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::encoding($encoding);
         }
         
     }

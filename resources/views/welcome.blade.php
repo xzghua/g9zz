@@ -75,9 +75,12 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    叶落山城秋
                 </div>
-
+                <div class="visible-print text-center">
+                    {!! QrCode::size(300)->generate(env('WEIXIN_LOGIN'))!!}
+                    <p>Scan me to return to the original page.</p>
+                </div>
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>

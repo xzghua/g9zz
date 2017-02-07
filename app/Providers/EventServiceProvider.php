@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Listeners\QueryListener;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -15,6 +17,13 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
+        ],
+        'Illuminate\Database\Events\QueryExecuted' => [
+            'App\Listeners\QueryListener'
+        ],
+        'SocialiteProviders\Manager\SocialiteWasCalled' => [
+            'SocialiteProviders\Weibo\WeiboExtendSocialite@handle',
+            'SocialiteProviders\Weixin\WeixinExtendSocialite@handle',
         ],
     ];
 
