@@ -15,8 +15,16 @@ Route::get('/list/{cate_slug}','IndexController@postList')->name('index.post.lis
 Route::get('/detail/{id}','IndexController@postDetail')->where('id','[0-9]+')->name('index.post.detail');
 //创建帖子页
 Route::get('/post/create','IndexController@getPostCreate')->name('index.post.create');
+//创建帖子
+Route::post('post','PostController@store')->name('index.post.store');
+
 //提交附言
 Route::post('/appends/{id}','IndexController@postAppend')->where('id','[0-9]+')->name('index.appends.store');
 
 //提交回复
 Route::post('reply','IndexController@postReply')->name('index.post.reply');
+
+Route::get('/me/center','MeCenterController@index')->name('index.me.center');
+
+
+

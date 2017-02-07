@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Index;
 
 use App\Mail\SendMail;
+use App\Models\Posts;
 use App\Repositories\Eloquent\AppendRepository;
 use App\Repositories\Eloquent\CategoryRepository;
 use App\Http\Controllers\Controller;
@@ -43,20 +44,28 @@ class IndexController extends Controller
      */
     public function postList($cate_slug)
     {
-        $slugId  = $this->categoryRepository->checkSlugExists($cate_slug);
-
-        if (empty($slugId)) $this->indexPushError();
-
         $request = \Request::only(['filter','cate']);
         \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $request]);
 
-        if (!empty($request['cate'])) {
-            $cate_slug = $request['cate'];
+        //如果展示全部帖子
+        if ($cate_slug == 'all') {
+            $postList = $this->postRepository->models();
+            $cateShow = [];
+
+        } else {
+            $slugId  = $this->categoryRepository->checkSlugExists($cate_slug);
+
+            if (empty($slugId)) $this->indexPushError();
+
+            if (!empty($request['cate'])) {
+                $cate_slug = $request['cate'];
+            }
+
+            $cateShow = $this->categoryRepository->getAllIsShowCateByCateSlug($cate_slug);//该分类或者该父分类下所有的is_show列表
+            $cateList = $this->categoryRepository->getPostListByCateSlug($cate_slug);
+            $postList = $this->postRepository->getPostListByCateList($cateList);
         }
 
-        $cateShow = $this->categoryRepository->getAllIsShowCateByCateSlug($cate_slug);//该分类或者该父分类下所有的is_show列表
-        $cateList = $this->categoryRepository->getPostListByCateSlug($cate_slug);
-        $postList = $this->postRepository->getPostListByCateList($cateList);
 
         if ($request['filter'] == 'excellent') {
             $postList = $postList->where('is_excellent','yes');
@@ -64,11 +73,14 @@ class IndexController extends Controller
 
         $postList = $postList
             ->orderBy('is_top','asc')
+            ->orderBy('created_at','desc')
             ->with('category')
             ->with('author')
             ->with('last_reply_user')
-            ->paginate(per_page(3));
-        return view('index.'.set_index_theme().'.post.index',compact('postList','cateShow'));
+            ->paginate(per_page(5));
+        parse_str(parse_url(url()->full(),PHP_URL_QUERY),$link);
+
+        return view('index.'.set_index_theme().'.post.index',compact('postList','cateShow','link'));
     }
 
     /**
@@ -184,7 +196,8 @@ class IndexController extends Controller
 
     public function getPostCreate()
     {
-        return view('index.'.set_index_theme().'.post.create');
+        $categories = $this->categoryRepository->getCate();
+        return view('index.'.set_index_theme().'.post.create',compact('categories'));
     }
 
 

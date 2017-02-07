@@ -37,33 +37,33 @@
                     <h2>发布帖子</h2>
                 </div>
             </div>
-            <form action="">
-                <div class="create_add">
-                    <div class="create_select">
+            <form action="{{route('index.post.store')}}" method="post">
+                {{ csrf_field() }}
 
-                        <select id="done" class="selectpicker"  data-done-button="true">
-                            <option>选择分类</option>
-                            <option>教程</option>
-                            <option>分享</option>
-                            <option>社区</option>
-                            <option>文档</option>
-                            <option>问答</option>
-                        </select>
-                    </div>
+                <div class="create_add">
+
                     <div class="create_title">
                         <div class="form-group ">
-                            <input type="email" id="topicTitle" class="form-control"  placeholder="帖子标题">
+                            <input type="text" id="topicTitle" name="title" class="form-control"  placeholder="帖子标题">
                         </div>
                     </div>
                 </div>
                 <div class="info_addreply" style="margin: 0;">
                     <div class="editormd" id="test-editormd">
-                        <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc"></textarea>
-                        <textarea class="editormd-html-textarea" name="markdowncode"></textarea>
+                        <textarea class="editormd-markdown-textarea" name="content"></textarea>
+                        <textarea class="editormd-html-textarea" name="content"></textarea>
                     </div>
                 </div>
+                <div class="create_select">
+
+                    <select id="done" name="categoryId" class="selectpicker show-menu-arrow" data-size="7" data-placement="选择分类" data-live-search="true"  data-style="btn-info" data-done-button="true">
+                        @foreach($categories as $item)
+                            <option value="{{$item->id}}">{{$item->html.$item->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="create_submit">
-                    <button type="button" class="btn btn-success">发布</button>
+                    <button type="submit" class="btn btn-success">发布</button>
                 </div>
             </form>
         </div>

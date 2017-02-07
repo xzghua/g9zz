@@ -140,7 +140,7 @@
                 </div>
 
             </div>
-            <form action="{{route('index.reply.store')}}" class="topicForm">
+            <form action="{{route('reply.store')}}" class="topicForm">
                 <div class="info_addreply">
                     <div class="editormd" id="test-editormd">
                         <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc"></textarea>

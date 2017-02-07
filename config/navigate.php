@@ -11,6 +11,10 @@ return [
         'name' => '首页',
         'url' => '/'
     ],
+    'all' => [
+        'name' => '全部',
+        'url' => PHP_SAPI === 'cli' ? false : url('list','all')
+    ],
     '0' => [
         'name' => '社区',
         'url' => PHP_SAPI === 'cli' ? false : url('list','shequ')

@@ -15,13 +15,16 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     public function model()
     {
-        // TODO: Implement model() method.
         return Posts::class;
+    }
+
+    public function models()
+    {
+        return $this->model;
     }
 
     public function getAll()
     {
-        // TODO: Implement getAll() method.
         return 1111;
     }
 

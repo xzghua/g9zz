@@ -27,11 +27,11 @@
 
                     <div class="index_left_head">
                         <ul class="">
-                            <li  data-content="当前分类下の所有"   @if (url()->current() == url()->full()) class="active" @endif ><a href="{{url()->current()}}">全部</a></li>
-                            <li  data-content="精华的话题" @if (url()->current().'?filter=excellent' == url()->full()) class="active" @endif><a href="{{url()->current()}}?filter=excellent" >精华</a></li>
-                            {{--{{dd(url()->current(),url()->full())}}--}}
+                            <li  data-content="当前分类下の所有"   @if (empty($link['filter']) && empty($link['cate']) ) class="active" @endif ><a href="{{url()->current()}}">全部</a></li>
+                            <li  data-content="精华的话题" @if (!empty($link['filter']) &&  $link['filter'] == 'excellent') class="active" @endif><a href="{{url()->current()}}?filter=excellent" >精华</a></li>
+{{--                            {{dd(url()->current(),url()->full())}}--}}
                             @foreach($cateShow as $value)
-                                <li data-content="{{$value->name}}" @if (url()->current()."?cate=".$value->slug == url()->full()) class="active" @endif><a href="{{url()->current()}}?cate={{$value->slug}}" >{{$value->name}}</a></li>
+                                <li data-content="{{$value->name}}" @if (!empty($link['cate']) &&  $link['cate'] == $value->slug) class="active" @endif><a href="{{url()->current()}}?cate={{$value->slug}}" >{{$value->name}}</a></li>
                             @endforeach
                             </ul>
                     </div>
@@ -79,16 +79,11 @@
                         </ul>
 
                         <nav class="index_page">
-                        {{$postList->links()}}
-                            {{--<ul class="pagination">--}}
-                                {{--<li class="disabled"><a href="#">&laquo;</a></li>--}}
-                                {{--<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>--}}
-                                {{--<li><a href="#">2</a></li>--}}
-                                {{--<li><a href="#">3</a></li>--}}
-                                {{--<li><a href="#">4</a></li>--}}
-                                {{--<li><a href="#">5</a></li>--}}
-                                {{--<li><a href="#">&raquo;</a></li>--}}
-                            {{--</ul>--}}
+                        @if (!empty($link['filter']) &&  $link['filter'] == 'excellent')
+                            {{$postList->appends(['filter' => 'excellent'])->links()}}
+                        @else
+                             {{$postList->links()}}
+                        @endif
                         </nav>
                     </div>
                 </div>

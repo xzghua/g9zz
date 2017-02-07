@@ -17,11 +17,6 @@
     @yield('css')
 </head>
 <body>
-<!--
-        	作者：hanying991763@163.com
-        	时间：2017-01-11
-        	描述：头部信息
-        -->
 
 <div class="head">
     <div class="header">
@@ -36,7 +31,7 @@
         <div class="header_info">
             <ul>
                 <li><a href="">0</a> </li>
-                <li><a href="#" class="userHref"><img src="/index/g9zz/images/avat.jpg" class="userImg"><span class="userName">琴歌</span></a></li>
+                <li><a href="{{route('index.me.center')}}" class="userHref"><img src="/index/g9zz/images/avat.jpg" class="userImg"><span class="userName">琴歌</span></a></li>
                 <li></li>
             </ul>
         </div>
@@ -46,11 +41,6 @@
 
 @yield('content')
 
-<!--
-        	作者：hanying991763@163.com
-        	时间：2017-01-11
-        	描述：底部内容
-        -->
 <div class="footer">
     <div class="footer_content">
         <div class="footer_copyright ">
