@@ -66,6 +66,10 @@ class Handler extends ExceptionHandler
 //            return view('errors.404');
 //        }
 
+        if ($exception instanceof DataNullException) {
+            dd('数据不存在');
+        }
+
         return parent::render($request, $exception);
     }
 

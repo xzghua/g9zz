@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
  * App\Models\Users
@@ -91,6 +92,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Users extends Authenticatable
 {
     //
+    use EntrustUserTrait;
+
     protected $table = 'users';
 
     protected $fillable = [

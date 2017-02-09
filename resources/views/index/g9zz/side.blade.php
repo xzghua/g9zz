@@ -5,7 +5,7 @@
         </div>
         <div class="index_left_content">
             <div class="login">
-                <a href="">马上登录</a>
+                <a href="/login">马上登录</a>
                 <a href="">立即注册</a>
             </div>
             <div class="">

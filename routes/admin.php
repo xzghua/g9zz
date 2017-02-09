@@ -6,8 +6,8 @@
  * Time: 下午2:14
  */
 
-//Route::group(['middleware' => ['web','auth']], function () { //需要登陆
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web','auth']], function () { //需要登陆
+//Route::group(['middleware' => ['web']], function () {
 
 //    Route::resource('index','BackendController');
     Route::get('index','BackendController@index')->name('admin.index');
@@ -36,6 +36,23 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('reply/create','ReplyController@create')->name('reply.create');
     Route::get('reply/{id}/edit','ReplyController@edit')->where('id','[0-9]+')->name('reply.edit');
     Route::put('reply/{id}','ReplyController@update')->where('id','[0-9]+')->name('reply.update');
+
+    //User
+    Route::get('user','UserController@index')->name('user.index');
+
+    //Permission
+    Route::get('permission','PermissionController@index')->name('permission.index');
+    Route::get('permission/create','PermissionController@create')->name('permission.create');
+    Route::post('permission','PermissionController@store')->name('permission.store');
+    Route::get('permission/{id}/edit','PermissionController@edit')->where('id','[0-9]+')->name('permission.edit');
+    Route::put('permission/{id}','PermissionController@update')->where('id','[0-9]+')->name('permission.update');
+
+    //Role
+    Route::get('role','RoleController@index')->name('role.index');
+    Route::get('role/create','RoleController@create')->name('role.create');
+    Route::post('role','RoleController@store')->name('role.store');
+    Route::get('role/{id}/edit','RoleController@edit')->where('id','[0-9]+')->name('role.edit');
+    Route::put('role/{id}','RoleController@update')->where('id','[0-9]+')->name('role.update');
 
 });
 

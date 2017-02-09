@@ -179,6 +179,8 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
         //二维码生成
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        //三方权限
+        Zizaco\Entrust\EntrustServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -240,6 +242,7 @@ return [
         'Reminder'  => Rry\Reminder\ReminderFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

@@ -169,39 +169,49 @@
             </li>
 
             {{--帖子--}}
-            <li class="dropdown @if (\Request::getRequestUri() == '/admin/post') active @endif" >
+            <li class="dropdown @if (\Request::getRequestUri() == '/admin/post' || \Request::getRequestUri() == '/admin/post/create') active @endif" >
                 <a class="sa-side-table" href="">
                     <span class="menu-item">帖子</span>
                 </a>
                 <ul class="list-unstyled menu-item">
                     <li><a href="/admin/post" class="@if (\Request::getRequestUri() == '/admin/post') active @endif">列表</a></li>
-                    <li><a href="/admin/post/create">创建帖子</a></li>
+                    <li><a href="/admin/post/create" class="@if (\Request::getRequestUri() == '/admin/post/create') active @endif">创建帖子</a></li>
                 </ul>
             </li>
 
             {{--分类--}}
-            <li class="dropdown @if (\Request::getRequestUri() == '/admin/category') active @endif" >
+            <li class="dropdown @if (\Request::getRequestUri() == '/admin/category' || \Request::getRequestUri() == '/admin/category/create') active @endif" >
                 <a class="sa-side-typography" href="">
                     <span class="menu-item">分类</span>
                 </a>
                 <ul class="list-unstyled menu-item">
                     <li><a href="/admin/category" class="@if (\Request::getRequestUri() == '/admin/category') active @endif">分类列表</a></li>
-                    <li><a href="/admin/category/create">创建分类</a></li>
+                    <li><a href="/admin/category/create" class="@if (\Request::getRequestUri() == '/admin/category/create') active @endif">创建分类</a></li>
                 </ul>
             </li>
 
             {{--回复--}}
-            <li class="dropdown @if (\Request::getRequestUri() == '/admin/reply') active @endif" >
+            <li class="dropdown @if (\Request::getRequestUri() == '/admin/reply' || \Request::getRequestUri() == '/admin/reply/create') active @endif" >
                 <a class="sa-side-widget" href="">
                     <span class="menu-item">回复</span>
                 </a>
                 <ul class="list-unstyled menu-item">
                     <li><a href="/admin/reply" class="@if (\Request::getRequestUri() == '/admin/reply') active @endif">回复列表</a></li>
-                    <li><a href="/admin/reply/create">新建回复</a></li>
+                    <li><a href="/admin/reply/create" class="@if (\Request::getRequestUri() == '/admin/reply/create') active @endif">新建回复</a></li>
                 </ul>
             </li>
 
-
+            {{--权限--}}
+            <li class="dropdown @if (\Request::getRequestUri() == '/admin/user' || \Request::getRequestUri() == '/admin/role' || \Request::getRequestUri() == '/admin/permission') active @endif" >
+                <a class="sa-side-typography" href="">
+                    <span class="menu-item">权限</span>
+                </a>
+                <ul class="list-unstyled menu-item">
+                    <li><a href="/admin/user" class="@if (\Request::getRequestUri() == '/admin/user') active @endif">用户列表</a></li>
+                    <li><a href="/admin/role" class="@if (\Request::getRequestUri() == '/admin/role') active @endif">角色列表</a></li>
+                    <li><a href="/admin/permission" class="@if (\Request::getRequestUri() == '/admin/permission') active @endif">权限列表</a></li>
+                </ul>
+            </li>
 
             {{--<li>--}}
                 {{--<a class="sa-side-typography" href="typography.html">--}}
@@ -213,53 +223,53 @@
                     {{--<span class="menu-item">Widgets</span>--}}
                 {{--</a>--}}
             {{--</li>--}}
-            <li>
-                <a class="sa-side-table" href="tables.html">
-                    <span class="menu-item">Tables</span>
-                </a>
-            </li>
+            {{--<li>--}}
+                {{--<a class="sa-side-table" href="tables.html">--}}
+                    {{--<span class="menu-item">Tables</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
 
-            <li class="dropdown">
-                <a class="sa-side-ui" href="">
-                    <span class="menu-item">User Interface</span>
-                </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="buttons.html">Buttons</a></li>
-                    <li><a href="labels.html">Labels</a></li>
-                    <li><a href="images-icons.html">Images &amp; Icons</a></li>
-                    <li><a href="alerts.html">Alerts</a></li>
-                    <li><a href="media.html">Media</a></li>
-                    <li><a href="components.html">Components</a></li>
-                    <li><a href="other-components.html">Others</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="sa-side-chart" href="charts.html">
-                    <span class="menu-item">Charts</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-folder" href="file-manager.html">
-                    <span class="menu-item">File Manager</span>
-                </a>
-            </li>
-            <li>
-                <a class="sa-side-calendar" href="calendar.html">
-                    <span class="menu-item">Calendar</span>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a class="sa-side-page" href="">
-                    <span class="menu-item">Pages</span>
-                </a>
-                <ul class="list-unstyled menu-item">
-                    <li><a href="list-view.html">List View</a></li>
-                    <li><a href="profile-page.html">Profile Page</a></li>
-                    <li><a href="messages.html">Messages</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="404.html">404 Error</a></li>
-                </ul>
-            </li>
+            {{--<li class="dropdown">--}}
+                {{--<a class="sa-side-ui" href="">--}}
+                    {{--<span class="menu-item">User Interface</span>--}}
+                {{--</a>--}}
+                {{--<ul class="list-unstyled menu-item">--}}
+                    {{--<li><a href="buttons.html">Buttons</a></li>--}}
+                    {{--<li><a href="labels.html">Labels</a></li>--}}
+                    {{--<li><a href="images-icons.html">Images &amp; Icons</a></li>--}}
+                    {{--<li><a href="alerts.html">Alerts</a></li>--}}
+                    {{--<li><a href="media.html">Media</a></li>--}}
+                    {{--<li><a href="components.html">Components</a></li>--}}
+                    {{--<li><a href="other-components.html">Others</a></li>--}}
+                {{--</ul>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a class="sa-side-chart" href="charts.html">--}}
+                    {{--<span class="menu-item">Charts</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a class="sa-side-folder" href="file-manager.html">--}}
+                    {{--<span class="menu-item">File Manager</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a class="sa-side-calendar" href="calendar.html">--}}
+                    {{--<span class="menu-item">Calendar</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            {{--<li class="dropdown">--}}
+                {{--<a class="sa-side-page" href="">--}}
+                    {{--<span class="menu-item">Pages</span>--}}
+                {{--</a>--}}
+                {{--<ul class="list-unstyled menu-item">--}}
+                    {{--<li><a href="list-view.html">List View</a></li>--}}
+                    {{--<li><a href="profile-page.html">Profile Page</a></li>--}}
+                    {{--<li><a href="messages.html">Messages</a></li>--}}
+                    {{--<li><a href="login.html">Login</a></li>--}}
+                    {{--<li><a href="404.html">404 Error</a></li>--}}
+                {{--</ul>--}}
+            {{--</li>--}}
         </ul>
 
     </aside>

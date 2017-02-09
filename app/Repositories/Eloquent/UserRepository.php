@@ -19,6 +19,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return Users::class;
     }
 
+    public function models()
+    {
+        return $this->model;
+    }
+
     public function getUserByGithubId($githubId)
     {
         return $this->model->whereGithubId($githubId)->firstOrFail();

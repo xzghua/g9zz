@@ -40,4 +40,18 @@ return [
     'append' => [
         'content.required' => 405000000,
     ],
+
+    'permission' => [
+        'name.required' => 406000000,
+        'name.unique' => 406000003,
+        'display_name.required' => 406000001,
+        'description.max' => 406000002,
+    ],
+
+    'role' => [
+        'name.required' => 407000000,
+        'name.unique' => 407000003,
+        'display_name.required' => 407000001,
+        'description.max' => 407000002,
+    ],
 ];
