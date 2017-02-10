@@ -57,7 +57,7 @@ class PermissionController extends Controller
             'description' => 'max:60',
         ];
 
-        $this->requestValidate($input,$rules,'category');
+        $this->requestValidate($input,$rules,'permission');
 
         $this->permissionRepository->create($input);
         reminder()->success('权限创建成功','创建成功');
@@ -96,8 +96,24 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->permissionRepository->find($id);
 
+        $input = $request->only(['name','displayName','description']);
+        $input = parse_input($input);
+        \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
+
+        $rules = [
+            'name' => 'required|unique:permissions,name,'.$id,
+            'display_name' => 'required',
+            'description' => 'max:60',
+        ];
+
+        $this->requestValidate($input,$rules,'permission');
+
+        $this->permissionRepository->update($input,$id);
+        reminder()->success('权限修改成功','修改成功');
+
+        return  redirect()->route('permission.index');
     }
 
     /**

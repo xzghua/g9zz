@@ -40,7 +40,7 @@
                         <td>{{$item->created_at}}</td>
                         <td>
                             <form action="/admin/permission/{{$item->id}}" method="post">
-                                <button class="btn-primary"><a href="/admin/permission/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
+                                <button class="btn-primary"><a href="{{route('permission.edit',$item->id)}}">  <span class="icon">&#61952;</span> 修改</a></button>
                                 <input type="hidden" name="_method" value="delete">
                                 {!! csrf_field() !!}
                                 <button class="btn-danger"><span class="icon">&#61918;</span> 删除</button>

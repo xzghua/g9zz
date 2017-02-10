@@ -82,7 +82,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role =  $this->roleRepository->find($id);
+        return view('admin.'.set_theme().'.role.edit',compact('role'));
     }
 
     /**
@@ -94,7 +95,24 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->roleRepository->find($id);
+
+        $input = $request->only(['name','displayName','description']);
+        $input = parse_input($input);
+        \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['request' => $input]);
+
+        $rules = [
+            'name' => 'required|unique:roles,name,'.$id,
+            'display_name' => 'required',
+            'description' => 'max:60',
+        ];
+
+        $this->requestValidate($input,$rules,'role');
+
+        $this->roleRepository->update($input,$id);
+        reminder()->success('角色修改成功','修改成功');
+
+        return  redirect()->route('role.index');
     }
 
     /**

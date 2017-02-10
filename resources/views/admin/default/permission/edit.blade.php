@@ -14,8 +14,9 @@
 @section('content')
 
     <div class="block-area" id="required">
-        <form role="form" class="form-validation-1" action="/admin/permission/" method="post">
+        <form role="form" class="form-validation-1" action="{{route('permission.update',$permission->id)}}" method="post">
             {{ csrf_field() }}
+            <input type="hidden" name="_method" value="put">
 
             <h3 class="block-title">NAME</h3>
             <i style="color: red;font-size: 5px;">(建议使用英文或英文加下划线)</i>
