@@ -24,9 +24,9 @@
   - Github:[https://github.com/bosnadev/repository](https://github.com/bosnadev/repository)
   - 中文:[http://laravelacademy.org/post/3063.html](http://laravelacademy.org/post/3063.html)
 
-- 
-  - Github:[]()
-  - 中文:[]()
+- Zizaco/entrust
+  - Github:[https://github.com/Zizaco/entrust](https://github.com/Zizaco/entrust)
+  - 中文:[https://laravel-china.org/topics/166](https://laravel-china.org/topics/166)
 
 - 
   - Github:[]()

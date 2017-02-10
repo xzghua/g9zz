@@ -12,3 +12,10 @@
 - 前端首页导航 就是分类 写死 位置在 `config/navigate.php` 里
 
 
+
+
+
+#### 修改部分
+
+- `权限系统Zizaco/entrust` 配置文件`config/entrust.php` 修改 `'permission' => 'App\Models\Permission' ` 和 `'role' => 'App\Models\Role'`
+- `toastr` 修改注册绑定.... 自己改个包算了....

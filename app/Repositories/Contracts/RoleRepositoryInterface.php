@@ -11,5 +11,7 @@ namespace App\Repositories\Contracts;
 
 interface RoleRepositoryInterface extends BaseRepositoryInterface
 {
+    public function getHadAssignedPermission($roleId);
 
+    public function getHadAssignedPermissionIds($roleId);
 }

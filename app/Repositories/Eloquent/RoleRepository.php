@@ -23,4 +23,23 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
     {
         return $this->model;
     }
+
+    public function getHadAssignedPermission($roleId)
+    {
+        return $this->model->find($roleId)->perms()->get();
+    }
+
+    public function getHadAssignedPermissionIds($roleId)
+    {
+        $result = $this->getHadAssignedPermission($roleId);
+        $ids = [];
+        if (!empty($result->toArray())) {
+            foreach ($result as $value) {
+                array_push($ids,$value->id);
+            }
+            array_unique($ids);
+        }
+
+        return $ids;
+    }
 }

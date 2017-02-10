@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\Eloquent\PermissionRepository;
 use App\Repositories\Eloquent\RoleRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,9 +11,13 @@ class RoleController extends Controller
 {
     public $roleRepository;
 
-    public function __construct(RoleRepository $roleRepository)
+    public $permissionRepository;
+
+
+    public function __construct(RoleRepository $roleRepository,PermissionRepository $permissionRepository)
     {
         $this->roleRepository = $roleRepository;
+        $this->permissionRepository = $permissionRepository;
     }
 
 
@@ -124,5 +129,18 @@ class RoleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function getAssignPermission($id)
+    {
+        $permissions = $this->permissionRepository->all();
+        $rolePermissionIds = $this->roleRepository->getHadAssignedPermissionIds($id);
+        return view('admin.'.set_theme().'.rbac.assign',compact('permissions','rolePermissionIds'));
+    }
+
+    public function postAssignPermission()
+    {
+
     }
 }

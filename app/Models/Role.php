@@ -18,4 +18,12 @@ class Role extends EntrustRole
     protected $fillable = [
         'name','display_name','description'
     ];
+
+    public function perms()
+    {
+        return parent::perms();
+    }
+
+
+
 }
