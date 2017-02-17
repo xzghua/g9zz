@@ -36,7 +36,7 @@
                    空空乳液~
                 </div>
             @endif
-            
+
             @foreach($roles as $item)
                 <div class="media" title="{{$item->description}}">
                     <label for="{{$item->id}}">

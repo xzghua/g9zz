@@ -31,6 +31,12 @@
         </header>
         <form action="{{route('admin.role.assign',$id)}}" method="post">
             {!! csrf_field() !!}
+            @if (empty($permissions->toArray()))
+                <div class="media" >
+                    空空乳液~
+                </div>
+            @endif
+
             @foreach($permissions as $item)
                 <div class="media" title="{{$item->description}}">
                     <label for="{{$item->id}}">
