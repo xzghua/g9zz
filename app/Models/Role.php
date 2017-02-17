@@ -19,11 +19,4 @@ class Role extends EntrustRole
         'name','display_name','description'
     ];
 
-    public function perms()
-    {
-        return parent::perms();
-    }
-
-
-
 }

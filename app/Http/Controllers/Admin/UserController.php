@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\Eloquent\RoleRepository;
 use App\Repositories\Eloquent\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,9 +12,12 @@ class UserController extends Controller
 
     public $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public $roleRepository;
+
+    public function __construct(UserRepository $userRepository,RoleRepository $roleRepository)
     {
         $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
     }
 
 
@@ -24,8 +28,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-        $users = $this->userRepository->models()->orderBy('created_at','desc')->paginate(20);
+        $users = $this->userRepository->models()->with('roles')->orderBy('created_at','desc')->paginate(20);
+//        dd($users->toArray());
         return view('admin.'.set_theme().'.user.index',compact('users'));
 
     }
@@ -95,4 +99,26 @@ class UserController extends Controller
     {
         //
     }
+
+    public function getAssignRole($id)
+    {
+        $roles = $this->roleRepository->all();
+        $ids = $this->userRepository->getAssignRoleIds($id);
+        return view('admin.'.set_theme().'.rbac.userAssignRole',compact('roles','ids','id'));
+    }
+
+    public function postAssignRole(Request $request,$id)
+    {
+        $role = $request->only('role');
+        $res = $this->userRepository->syncRelationship($role,$id);
+
+        if ($res) {
+            reminder()->success('角色分配成功','操作成功');
+        } else {
+            reminder()->error('角色分配失败','操作失败');
+        }
+
+        return  redirect()->route('user.index');
+    }
+
 }

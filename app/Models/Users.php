@@ -107,4 +107,7 @@ class Users extends Authenticatable
         'weibo_link','verified','verification_token','email_notify_enabled',
         'register_source','last_actived_at',
     ];
+
+
+
 }

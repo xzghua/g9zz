@@ -1,22 +1,22 @@
 @extends('admin.default.master')
 
-@section('title','分配权限')
+@section('title','分配角色')
 
-@section('menu','分配权限')
-@section('page','分配权限')
+@section('menu','分配')
+@section('page','分配角色')
 
-@section('pageTitle','分配权限')
+@section('pageTitle','分配角色')
 
 @section('css')
 
 @endsection
 
 @section('content')
-    <h4 class="page-title b-0">分配角色</h4>
+
 
     <div class="listview list-container">
         <header class="listview-header media">
-            <input type="checkbox" class="pull-left list-parent-check" value="">
+            <input type="radio" class="pull-left list-parent-check" disabled value="">
 
             <ul class="list-inline list-mass-actions pull-left">
 
@@ -29,12 +29,12 @@
 
             <div class="clearfix"></div>
         </header>
-        <form action="{{route('role.assign',$id)}}" method="post">
+        <form action="{{route('user.assign',$id)}}" method="post">
             {!! csrf_field() !!}
-            @foreach($permissions as $item)
+            @foreach($roles as $item)
                 <div class="media" title="{{$item->description}}">
                     <label for="{{$item->id}}">
-                    <input type="checkbox" id="{{$item->id}}" name="permissions[]" @if(in_array($item->id,$rolePermissionIds)) checked @endif class="pull-left list-check" value="{{$item->id}}">
+                        <input type="radio" id="{{$item->id}}" name="role" @if(in_array($item->id,$ids)) checked @endif class="pull-left list-check" value="{{$item->id}}">
                         <div class="media-body">
                             {{$item->display_name}}
                         </div>
@@ -43,7 +43,7 @@
             @endforeach
 
             <div class="listview-header">
-                <button class="btn-primary">这是一个大大大大的提交按钮</button>
+                <button class="btn-primary">这是一个大大大大大の提交按钮</button>
             </div>
         </form>
     </div>

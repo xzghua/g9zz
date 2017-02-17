@@ -12,4 +12,7 @@ namespace App\Repositories\Contracts;
 interface UserRepositoryInterface extends BaseRepositoryInterface
 {
     public function getUserByGithubId($githubId);
+
+    public function syncRelationship($role,$id);
+
 }

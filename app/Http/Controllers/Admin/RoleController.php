@@ -142,7 +142,7 @@ class RoleController extends Controller
     {
         $permissions = $this->permissionRepository->all();
         $rolePermissionIds = $this->roleRepository->getHadAssignedPermissionIds($id);
-        return view('admin.'.set_theme().'.rbac.assign',compact('permissions','rolePermissionIds','id'));
+        return view('admin.'.set_theme().'.rbac.roleAssignPermission',compact('permissions','rolePermissionIds','id'));
     }
 
     /**

@@ -53,10 +53,13 @@ Route::group(['middleware' => ['web','auth']], function () { //需要登陆
     Route::post('role','RoleController@store')->name('role.store');
     Route::get('role/{id}/edit','RoleController@edit')->where('id','[0-9]+')->name('role.edit');
     Route::put('role/{id}','RoleController@update')->where('id','[0-9]+')->name('role.update');
+
     //role - assign permission
     Route::get('role/{id}/assign','RoleController@getAssignPermission')->where('id','[0-9]+')->name('role.assignment');
     Route::post('role/{id}/assign','RoleController@postAssignPermission')->where('id','[0-9]+')->name('role.assign');
-
+    //user - assign role
+    Route::get('user/{id}/assign','UserController@getAssignRole')->where('id','[0-9]+')->name('user.assignment');
+    Route::post('user/{id}/assign','UserController@postAssignRole')->where('id','[0-9]+')->name('user.assign');
 
 
 
