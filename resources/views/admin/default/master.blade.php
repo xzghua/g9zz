@@ -33,14 +33,14 @@
                 <a data-drawer="messages" class="drawer-toggle" href="">
                     <i class="sa-top-message"></i>
                     <i class="n-count animated">5</i>
-                    <span>Messages</span>
+                    <span>消息</span>
                 </a>
             </div>
             <div class="pull-left tm-icon">
                 <a data-drawer="notifications" class="drawer-toggle" href="">
                     <i class="sa-top-updates"></i>
                     <i class="n-count animated">9</i>
-                    <span>Updates</span>
+                    <span>更新</span>
                 </a>
             </div>
 
@@ -101,7 +101,7 @@
             <!-- Feeds -->
             <div class="s-widget m-b-25">
                 <h2 class="tile-title">
-                    News Feeds
+                    订阅新闻
                 </h2>
 
                 <div class="s-widget-body">
@@ -112,12 +112,12 @@
             <!-- Projects -->
             <div class="s-widget m-b-25">
                 <h2 class="tile-title">
-                    Projects on going
+                    正在进行的项目
                 </h2>
 
                 <div class="s-widget-body">
                     <div class="side-border">
-                        <small>Joomla Website</small>
+                        <small>权限</small>
                         <div class="progress progress-small">
                             <a href="#" data-toggle="tooltip" title="" class="progress-bar tooltips progress-bar-danger" style="width: 60%;" data-original-title="60%">
                                 <span class="sr-only">60% Complete</span>
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="side-border">
-                        <small>Opencart E-Commerce Website</small>
+                        <small>角色分配</small>
                         <div class="progress progress-small">
                             <a href="#" data-toggle="tooltip" title="" class="tooltips progress-bar progress-bar-info" style="width: 43%;" data-original-title="43%">
                                 <span class="sr-only">43% Complete</span>
@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     <div class="side-border">
-                        <small>Social Media API</small>
+                        <small>登陆</small>
                         <div class="progress progress-small">
                             <a href="#" data-toggle="tooltip" title="" class="tooltips progress-bar progress-bar-warning" style="width: 81%;" data-original-title="81%">
                                 <span class="sr-only">81% Complete</span>
@@ -141,7 +141,7 @@
                         </div>
                     </div>
                     <div class="side-border">
-                        <small>VB.Net Software Package</small>
+                        <small>注册</small>
                         <div class="progress progress-small">
                             <a href="#" data-toggle="tooltip" title="" class="tooltips progress-bar progress-bar-success" style="width: 10%;" data-original-title="10%">
                                 <span class="sr-only">10% Complete</span>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <div class="side-border">
-                        <small>Chrome Extension</small>
+                        <small>消息等等</small>
                         <div class="progress progress-small">
                             <a href="#" data-toggle="tooltip" title="" class="tooltips progress-bar progress-bar-success" style="width: 95%;" data-original-title="95%">
                                 <span class="sr-only">95% Complete</span>

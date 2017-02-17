@@ -14,4 +14,6 @@ interface RoleRepositoryInterface extends BaseRepositoryInterface
     public function getHadAssignedPermission($roleId);
 
     public function getHadAssignedPermissionIds($roleId);
+
+    public function syncRelationship($permissions,$id);
 }

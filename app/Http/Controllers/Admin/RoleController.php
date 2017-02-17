@@ -131,16 +131,39 @@ class RoleController extends Controller
         //
     }
 
-
+    /**
+     *
+     * 分配权限页面
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getAssignPermission($id)
     {
         $permissions = $this->permissionRepository->all();
         $rolePermissionIds = $this->roleRepository->getHadAssignedPermissionIds($id);
-        return view('admin.'.set_theme().'.rbac.assign',compact('permissions','rolePermissionIds'));
+        return view('admin.'.set_theme().'.rbac.assign',compact('permissions','rolePermissionIds','id'));
     }
 
-    public function postAssignPermission()
+    /**
+     *
+     * 分配权限操作
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postAssignPermission(Request $request,$id)
     {
+        $permissions = $request->only(['permissions']);
+        $res = $this->roleRepository->syncRelationship($permissions['permissions'],$id);
 
+        if ($res) {
+            reminder()->success('权限分配成功','操作成功');
+        } else {
+            reminder()->error('权限分配失败','操作失败');
+        }
+
+        return  redirect()->route('role.index');
     }
 }

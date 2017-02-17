@@ -24,11 +24,25 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
         return $this->model;
     }
 
+    /**
+     *
+     * 获取 已分配的权限
+     *
+     * @param $roleId
+     * @return mixed
+     */
     public function getHadAssignedPermission($roleId)
     {
         return $this->model->find($roleId)->perms()->get();
     }
 
+    /**
+     *
+     * 获取已分配的权限的ID列表
+     *
+     * @param $roleId
+     * @return array
+     */
     public function getHadAssignedPermissionIds($roleId)
     {
         $result = $this->getHadAssignedPermission($roleId);
@@ -41,5 +55,27 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
         }
 
         return $ids;
+    }
+
+    /**
+     * @param $permissions
+     * @param $id
+     * @return bool
+     */
+    public function syncRelationship($permissions,$id)
+    {
+        try{
+            \DB::beginTransaction();
+            $this->model->find($id)->perms()->sync([]);
+            $this->model->find($id)->perms()->sync($permissions);
+            \DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            $code = $e->getCode();
+            \Log::info('"controller.error" to listener "' . __METHOD__ . '".', ['message' => $e->getMessage(), 'code' => $code]);
+            return false;
+        }
+
     }
 }

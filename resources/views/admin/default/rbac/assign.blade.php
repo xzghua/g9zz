@@ -29,17 +29,19 @@
 
             <div class="clearfix"></div>
         </header>
-        <form action="#">
+        <form action="{{route('role.assign',$id)}}" method="post">
+            {!! csrf_field() !!}
             @foreach($permissions as $item)
                 <div class="media" title="{{$item->description}}">
                     <label for="{{$item->id}}">
-                    <input type="checkbox" id="{{$item->id}}" @if(in_array($item->id,$rolePermissionIds)) checked @endif class="pull-left list-check" value="">
+                    <input type="checkbox" id="{{$item->id}}" name="permissions[]" @if(in_array($item->id,$rolePermissionIds)) checked @endif class="pull-left list-check" value="{{$item->id}}">
                         <div class="media-body">
                             {{$item->display_name}}
                         </div>
                     </label>
                 </div>
             @endforeach
+
             <div class="listview-header">
                 <button class="btn-primary">这是一个大大大大的提交按钮</button>
             </div>
