@@ -44,5 +44,13 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->first();
     }
 
-
+    public function getAuthorByPostId($postId)
+    {
+        $post = $this->model->find($postId);
+        if (empty($post)) {
+            return null;
+        } else {
+            return $post->author()->first();
+        }
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Repositories\Eloquent\PermissionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Parser;
 
 class PermissionController extends Controller
 {
@@ -23,10 +24,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
         $permissions = $this->permissionRepository->models()->orderBy('created_at','desc')->paginate(20);
         return view('admin.'.set_theme().'.permission.index',compact('permissions'));
-
     }
 
     /**
@@ -58,7 +57,8 @@ class PermissionController extends Controller
         ];
 
         $this->requestValidate($input,$rules,'permission');
-
+        $parser = new Parser();
+        $input['description'] = $parser->makeHtml($input['description']);
         $this->permissionRepository->create($input);
         reminder()->success('权限创建成功','创建成功');
         return redirect()->route('admin.permission.index');
@@ -109,7 +109,8 @@ class PermissionController extends Controller
         ];
 
         $this->requestValidate($input,$rules,'permission');
-
+        $parser = new Parser();
+        $input['description'] = $parser->makeHtml($input['description']);
         $this->permissionRepository->update($input,$id);
         reminder()->success('权限修改成功','修改成功');
 

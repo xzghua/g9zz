@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Index;
 
+use App\Http\Controllers\Parser;
 use App\Mail\SendMail;
 use App\Models\Posts;
 use App\Repositories\Eloquent\AppendRepository;
@@ -11,6 +12,7 @@ use App\Repositories\Eloquent\PostRepository;
 use App\Repositories\Eloquent\ReplyRepository;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -22,12 +24,19 @@ class IndexController extends Controller
 
     public $appendRepository;
 
-    public function __construct(CategoryRepository $categoryRepository,PostRepository $postRepository,ReplyRepository $replyRepository,AppendRepository $appendRepository)
+    public $parser;
+
+    public function __construct(CategoryRepository $categoryRepository,
+                                PostRepository $postRepository,
+                                ReplyRepository $replyRepository,
+                                AppendRepository $appendRepository,
+                                Parser $parser)
     {
         $this->categoryRepository = $categoryRepository;
         $this->postRepository = $postRepository;
         $this->replyRepository = $replyRepository;
         $this->appendRepository = $appendRepository;
+        $this->parser = $parser;
     }
 
     public function index()
@@ -120,6 +129,8 @@ class IndexController extends Controller
         ];
 
         $this->requestValidate($input,$rules,'append');
+        $input['body_original'] = $input['content'];
+        $input['content'] = $this->parser->makeHtml($input['content']);
 
         $append = $this->appendRepository->create($input);
 
@@ -152,14 +163,24 @@ class IndexController extends Controller
 
         $this->requestValidate($input,$rules,'reply');
         $input['body_original'] = $input['body'];
-        $input['user_id'] = rand(1,30);//回复人的ID 谁登陆就是谁
+        $input['body'] = $this->parser->makeHtml($input['body']);
+        $input['user_id'] = \Auth::id();//回复人的ID 谁登陆就是谁
 
         $reply_count = $this->postRepository->find($input['post_id'])->reply_count;
 
-        $email = '2067930913@qq.com';//被回复的帖子的人
-        $replier = url(route('post.show',$input['user_id']));
+        $author = $this->postRepository->getAuthorByPostId($input['post_id']);
+        if (empty($author)) {
+            return response([
+                'status'        => 404,
+                'message'       => '帖子不存在',
+                'reply'         => $input['body'],
+                'manage_topics' => 'yes',
+            ]);
+        }
+        $email = $author->email;//被回复的帖子的人
+        $replier = url(route('index.post.detail',$input['user_id']));
         $name = '叶落山城秋';
-        $articleAddress = url(route('post.show',$input['user_id']));
+        $articleAddress = url(route('index.post.detail',$input['user_id']));
         $article = $this->postRepository->find($input['post_id'])->title;
         $content = $input['body'];
 
@@ -170,7 +191,6 @@ class IndexController extends Controller
             $update['last_reply_user_id'] = $input['user_id'];
             $update['reply_count'] = $reply_count + 1;
             $this->postRepository->update($update,$input['post_id']);
-
 
             \Mail::to($email)->send(new SendMail('reply',$replier,$name,$articleAddress,$article,$content));
 

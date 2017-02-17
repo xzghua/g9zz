@@ -25,7 +25,7 @@ class Appends extends Model
     protected $table = 'appends';
 
     protected $fillable = [
-        'content','topic_id',
+        'content','topic_id','body_original'
     ];
 
     public function post()

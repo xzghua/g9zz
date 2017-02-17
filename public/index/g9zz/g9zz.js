@@ -22,10 +22,11 @@ $('.topicSubmit').click(function () {
     var url = $('.topicForm').attr('action');
     var data = {
         "body":getMarkdown(),
+        "bodyOriginal":getMarkdownHtml(),
         "postId":topicId
     };
 
-    ajaxSubmit(url,data,userHref,userImg,userName);
+    ajaxSubmit(url,data,userHref,userImg,userName,getMarkdownHtml());
     removeMarkdown();
     var num = parseInt(replyCount)+parseInt(1);
     $('.replyCount').html(num);
@@ -66,17 +67,18 @@ function getMarkdownHtml() {
  * @param userHref
  * @param userImg
  * @param userName
+ * @param content
  */
-function ajaxSubmit(url,data,userHref,userImg,userName) {
+function ajaxSubmit(url,data,userHref,userImg,userName,content) {
     $.ajax({
         url:url,
         type:'post',
         sync:true,
         data:data,
         success:function(res){
-            if (res.code == '200') {
+            if (res.status == '200') {
                 toastr.success('操作成功');
-                ajaxReply(userImg,userHref,userName,getMarkdown());
+                ajaxReply(userImg,userHref,userName,content);
             }
         }
     })

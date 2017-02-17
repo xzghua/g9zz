@@ -29,7 +29,6 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userRepository->models()->with('roles')->orderBy('created_at','desc')->paginate(20);
-//        dd($users->toArray());
         return view('admin.'.set_theme().'.user.index',compact('users'));
 
     }

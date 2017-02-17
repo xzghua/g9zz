@@ -16,4 +16,7 @@ interface PostRepositoryInterface extends BaseRepositoryInterface
     public function getPostDetail($postId);
 
     public function models();
+
+    public function getAuthorByPostId($postId);
+
 }
