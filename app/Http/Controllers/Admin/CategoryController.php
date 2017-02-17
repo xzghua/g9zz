@@ -140,7 +140,7 @@ class CategoryController extends Controller
         $this->repository->update($input,$id);
         reminder()->success('分类修改成功','修改成功');
 
-        return  redirect()->route('category.index');
+        return  redirect()->route('admin.category.index');
     }
 
     /**

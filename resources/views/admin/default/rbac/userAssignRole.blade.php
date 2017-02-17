@@ -29,7 +29,7 @@
 
             <div class="clearfix"></div>
         </header>
-        <form action="{{route('user.assign',$id)}}" method="post">
+        <form action="{{route('admin.user.assign',$id)}}" method="post">
             {!! csrf_field() !!}
             @foreach($roles as $item)
                 <div class="media" title="{{$item->description}}">

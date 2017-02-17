@@ -61,7 +61,7 @@ class PermissionController extends Controller
 
         $this->permissionRepository->create($input);
         reminder()->success('权限创建成功','创建成功');
-        return redirect()->route('permission.index');
+        return redirect()->route('admin.permission.index');
     }
 
     /**
@@ -113,7 +113,7 @@ class PermissionController extends Controller
         $this->permissionRepository->update($input,$id);
         reminder()->success('权限修改成功','修改成功');
 
-        return  redirect()->route('permission.index');
+        return  redirect()->route('admin.permission.index');
     }
 
     /**

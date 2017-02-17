@@ -14,7 +14,7 @@
 @section('content')
 
     <div class="block-area" id="required">
-        <form role="form" class="form-validation-1" action="{{route('permission.update',$permission->id)}}" method="post">
+        <form role="form" class="form-validation-1" action="{{route('admin.permission.update',$permission->id)}}" method="post">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="put">
 

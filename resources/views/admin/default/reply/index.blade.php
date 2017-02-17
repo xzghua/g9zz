@@ -42,8 +42,9 @@
                         <td>{{ cut_html_str( $item->body,30)}}</td>
                         <td>{{ cut_html_str($item->body_original,30)}}</td>
                         <td>
-                            <button class="btn-primary"><a href="/admin/reply/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
                             <form action="/admin/reply/{{$item->id}}" method="post">
+                                <button class="btn-primary"><a href="/admin/reply/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
+
                                 <input type="hidden" name="_method" value="delete">
                                 {!! csrf_field() !!}
                                 <button class="btn-danger"><span class="icon">&#61918;</span> 删除</button>

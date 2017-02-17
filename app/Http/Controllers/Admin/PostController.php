@@ -75,7 +75,7 @@ class PostController extends Controller
         $id = $this->repository->create($input);
         reminder()->success('创建帖子成功','创建成功');
 
-        return redirect()->route('post.create');
+        return redirect()->route('admin.post.create');
     }
 
     /**
@@ -133,7 +133,7 @@ class PostController extends Controller
         $this->repository->update($input,$id);
         reminder()->success('分类创建成功','创建成功');
 
-        return redirect()->route('post.index');
+        return redirect()->route('admin.post.index');
 
     }
 

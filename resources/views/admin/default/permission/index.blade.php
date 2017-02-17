@@ -17,7 +17,7 @@
     <!-- Table Striped -->
     <div class="block-area" id="tableStriped">
         <h3 class="block-title">权限列表</h3>
-        <a href="{{route('permission.create')}}"><button class="btn-info">创建新权限</button></a>
+        <a href="{{route('admin.permission.create')}}"><button class="btn-info">创建新权限</button></a>
         <div class="table-responsive overflow">
             <table class="tile table table-bordered table-striped table-hover">
                 <thead>
@@ -40,7 +40,7 @@
                         <td>{{$item->created_at}}</td>
                         <td>
                             <form action="/admin/permission/{{$item->id}}" method="post">
-                                <button class="btn-primary"><a href="{{route('permission.edit',$item->id)}}">  <span class="icon">&#61952;</span> 修改</a></button>
+                                <button class="btn-primary"><a href="{{route('admin.permission.edit',$item->id)}}">  <span class="icon">&#61952;</span> 修改</a></button>
                                 <input type="hidden" name="_method" value="delete">
                                 {!! csrf_field() !!}
                                 <button class="btn-danger"><span class="icon">&#61918;</span> 删除</button>

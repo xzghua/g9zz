@@ -118,7 +118,7 @@ class UserController extends Controller
             reminder()->error('角色分配失败','操作失败');
         }
 
-        return  redirect()->route('user.index');
+        return  redirect()->route('admin.user.index');
     }
 
 }

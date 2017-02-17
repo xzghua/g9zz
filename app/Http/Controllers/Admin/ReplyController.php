@@ -143,7 +143,7 @@ class ReplyController extends Controller
         $this->requestValidate($input,$rules,'reply');
 
         $this->repository->update($input,$id);
-        return redirect()->route('reply.index');
+        return redirect()->route('admin.reply.index');
     }
 
     /**

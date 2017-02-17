@@ -65,7 +65,7 @@ class RoleController extends Controller
 
         $this->roleRepository->create($input);
         reminder()->success('角色创建成功','创建成功');
-        return redirect()->route('role.index');
+        return redirect()->route('admin.role.index');
     }
 
     /**
@@ -117,7 +117,7 @@ class RoleController extends Controller
         $this->roleRepository->update($input,$id);
         reminder()->success('角色修改成功','修改成功');
 
-        return  redirect()->route('role.index');
+        return  redirect()->route('admin.role.index');
     }
 
     /**
@@ -164,6 +164,6 @@ class RoleController extends Controller
             reminder()->error('权限分配失败','操作失败');
         }
 
-        return  redirect()->route('role.index');
+        return  redirect()->route('admin.role.index');
     }
 }

@@ -43,7 +43,7 @@
                             <form action="#" method="post">
 
                             <button class="btn-primary"><a href="/admin/post/{{$item->id}}/edit">  <span class="icon">&#61952;</span> 修改</a></button>
-                                <button class="btn-info"><a href="{{route('user.assignment',$item->id)}}">  <span class="icon">&#61735;</span> 分配角色</a></button>
+                                <button class="btn-info"><a href="{{route('admin.user.assignment',$item->id)}}">  <span class="icon">&#61735;</span> 分配角色</a></button>
 
                                 <input type="hidden" name="_method" value="delete">
                                 {!! csrf_field() !!}
